@@ -1,0 +1,129 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* span question*/
+#span-question {
+  display: flex;
+  justify-content: left;
+  height: 100pt;
+  margin-left: 50px;
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+/* training radio */
+
+
+.radio-left {
+  display: flex;
+  vertical-align: baseline;
+  vertical-align: super;
+}
+
+.radio-container {
+  background-color: #5d626375;
+  font-weight: bold;
+  font-size: 1.5rem;
+  vertical-align: baseline;
+  vertical-align: super;
+
+}
+
+/**/
+.item-ml-0 {
+  margin-left: 10px;
+
+  text-align: left;
+}
+
+.clickMe {
+  margin-left: 10px;
+}
+
+.btnNav {
+  width: 100px;
+}
+
+.label-verb {
+  font-size: 1.5rem;
+}
+
+.label-verb-question {
+  font-size: 3rem;
+}
+
+
+
+.home-card {
+  height: auto;
+}
+
+.col-sidebar {
+  max-width: 20%;
+}
+
+#training-content {
+  max-width: 500px;
+}
+
+/* Mobile: with  <740px*/
+@media only screen and (max-width:46.1875em) {
+  .courses-product {
+    flex-direction: column;
+  }
+
+  .col-sidebar {
+    max-width: 0px;
+  }
+
+  .col-content {
+    width: fit-content;
+
+  }
+}
+
+
+
+
+
+
+
+/* Table: with  740px<  <1024px */
+@media only screen and (min-width:46.25em) and (max-width:63.9375em) {}

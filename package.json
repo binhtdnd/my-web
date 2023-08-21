@@ -1,0 +1,30 @@
+{
+  "name": "connectdata",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "18.x"
+  },
+  "scripts": {
+    "server": "nodemon index.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "axios": "^1.4.0",
+    "body-parser": "^1.20.2",
+    "concurrently": "^8.2.0",
+    "express": "^4.18.2",
+    "mysql2": "^3.6.0",
+    "netlify-cli": "^16.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
