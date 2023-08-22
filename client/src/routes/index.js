@@ -15,7 +15,8 @@ const publicRoutes = [
     { path: '/training/:slug', component: Training, Layout: HeaderOnly },
     { path: '/chiadongtu/:slug', component: ChiaDongTu },
     { path: '/test', component: Test },
-    { path: '*', component: Home },
+    { path: '/:slug', component: Home },
+    { path: '/:slug/:slug', component: Home },
 
 ]
 
