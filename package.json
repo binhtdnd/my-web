@@ -7,7 +7,7 @@
     "node": "18.x"
   },
   "scripts": {
-    "server": "nodem index.js",
+    "server": "nodemon index.js",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "start": "node index.js"
