@@ -11,10 +11,13 @@ class Training extends Component {
       txt2: 'あんしょうばんごう',
       ip1: '1',
       ip2: '50',
+
+      valid: false,
       courses: window.location.pathname.slice(-2),
       tempWord: ['', '暗証番号', 'あんしょうばんごう', 'Mã số định danh cá nhân']
     }
-
+    this.validateInput = this.validateInput.bind(this)
+    this.fromToBtn = this.fromToBtn.bind(this)
   };
 
 
@@ -49,20 +52,7 @@ class Training extends Component {
   }
 
   onChangeIp1(event) {
-    if (event.target.value.length <= 0 || !Number.isInteger(parseInt(event.target.value))) {
-      alert("value of From must be greater than 0, please choose again")
-      event.target.value = 1
-    }
 
-    if (parseInt(event.target.value) <= 0) {
-      alert("value of From must be greater than 0, please choose again")
-      event.target.value = 1
-    }
-
-    if (this.state.ip2 - parseInt(event.target.value) <= 3) {
-      alert("from - to must be greater than 5, please choose again")
-      event.target.value = 1
-    }
 
     this.setState({
       ip1: event.target.value
@@ -72,27 +62,40 @@ class Training extends Component {
   }
   onChangeIp2(event) {
 
-    if (event.target.value.length <= 0 || !Number.isInteger(parseInt(event.target.value))) {
-      alert("Not int value of From must be greater than 0, please choose again")
-      event.target.value = 50
-    }
-
-    if (parseInt(event.target.value) <= 0) {
-      alert("value of From must be greater than 0, please choose again")
-      event.target.value = 50
-    }
-
-    if (parseInt(event.target.value) - this.state.ip1 <= 3) {
-      alert("from - to must be greater than 5, please choose again")
-      event.target.value = 50
-    }
-
     this.setState({
       ip2: event.target.value
     })
 
   }
 
+  fromToBtn() {
+    let mess = this.validateInput(this.state.ip1, this.state.ip2)
+    if (mess === 'ok') {
+      this.setState({
+        valid: true
+      })
+    } else {
+      this.setState({
+        ip1: 1,
+        ip2: 50
+      })
+      alert(mess)
+    }
+  }
+
+  validateInput(a, b) {
+    var mess = 'ok'
+
+    if (b < 9) {
+      mess = '[Giá trị kết thúc] phải > 10, hãy nhập lại !!!'
+    } else if (a < 0) {
+      mess = '[Giá trị bắt đầu] phải > 0, hãy nhập lại !!!'
+    } else if (b - a < 5) {
+      mess = '[Giá trị Kết thúc]  -  [Giá trị Bắt đầu]  phải lớn hơn 10 đơn vị, hãy nhập lại !!!'
+    }
+    console.log(mess)
+    return mess
+  }
 
   render() {
 
@@ -102,12 +105,12 @@ class Training extends Component {
       <div className="container mt-4 " >
         <form method="GET" onSubmit={(e) => { this.doSomething() }}>
           <div className="form-group">
-            <div className="row">
+            <div className="row justify-content-md-center">
               <div className="col-sm-4 p-3 mb-2 bg-primary text-white">
 
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item">
-                    <select className="selectpicker mt-2" id="sp1" name="spQuestion" onChange={this.onChangeSp1.bind(this)}>
+                    <select className="selectpicker mt-2" id="sp1" onChange={this.onChangeSp1.bind(this)}>
                       <option value="1">Kanji</option>
                       <option value="2">Hiragana</option>
                       <option value="3">Việt Nam</option>
@@ -115,7 +118,7 @@ class Training extends Component {
                   </li>
 
                   <li className="list-group-item">
-                    <select className="selectpicker mt-2" id="sp2" name="spAnswer" onChange={this.onChangeSp2.bind(this)} >
+                    <select className="selectpicker mt-2" id="sp2" onChange={this.onChangeSp2.bind(this)} >
                       <option value="2">Hiragana</option>
                       <option value="1">Kanji</option>
                       <option value="3">Việt Nam</option>
@@ -124,14 +127,7 @@ class Training extends Component {
 
                 </ul>
 
-                <div className="inline mt-2">
-                  <label className='ml-1'>From</label>
-                  <input value={this.state.ip1} name="ip1 input ml-1" className='input ml-1' onChange={this.onChangeIp1.bind(this)} />
-                </div>
-                <div className="inline mt-2">
-                  <label className='ml-1'> To </label>
-                  <input value={this.state.ip2} name="ip1 input ml-2" className='input ml-1' onChange={this.onChangeIp2.bind(this)} />
-                </div>
+
 
               </div>
 
@@ -141,13 +137,33 @@ class Training extends Component {
                   <li className="list-group-item mt-2" id="txt2">{this.state.txt2}</li>
                 </ul>
               </div>
+
             </div>
 
 
           </div>
         </form >
+        <div className='input-form-training'>
+          <div className="input-group mb-3 input-form-training">
+            <div className="input-group-prepend">
+              <span className="input-group-text" >Bắt đầu:</span>
+            </div>
+            <input type="text" className="input-training" value={this.state.ip1} onChange={this.onChangeIp1.bind(this)} />
+          </div>
 
-        <Link to={`/training/${this.state.sp1}-${this.state.sp2}-${this.state.ip1 - 1}-${this.state.ip2 - 1}-${this.state.courses}`}>
+          <div className="input-group mb-3 input-form-training">
+            <div className="input-group-prepend">
+              <span className="input-group-text" >Kết Thúc:</span>
+            </div>
+            <input type="text" className="input-training" value={this.state.ip2} onChange={this.onChangeIp1.bind(this)} />
+          </div>
+        </div>
+
+
+        <button onClick={this.fromToBtn} className='btn btn-primary'>OK</button>
+        <Link to={`/training/${this.state.sp1}-${this.state.sp2}-${this.state.ip1 - 1}-${this.state.ip2 - 1}-${this.state.courses}`}
+          className={`${this.state.valid ? "bShow" : "bHidden"}`}
+        >
           <h2>Go </h2>
         </Link>
 
