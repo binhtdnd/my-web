@@ -8,17 +8,17 @@ var jsonParser = bodyParser.json()
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 app.use(express.static(path.join(__dirname + "/public")))
-// const connection = mysql.createConnection({
-//     host: '103.200.23.120',
-//     user: 'aliceiov_binhtdnd',
-//     password: 'mhbbnsbtcm1!qQbinh',
-//     database: 'aliceiov_japan'
-// });
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    database: 'japan'
+    host: '103.200.23.120',
+    user: 'aliceiov_binhtdnd',
+    password: 'mhbbnsbtcm1!qQbinh',
+    database: 'aliceiov_japan'
 });
+// const connection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     database: 'japan'
+// });
 
 
 connection.connect(function (err) {
