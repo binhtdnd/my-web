@@ -148,14 +148,14 @@ class Training extends Component {
             <div className="input-group-prepend">
               <span className="input-group-text" >Bắt đầu:</span>
             </div>
-            <input type="text" className=" input-training " value={this.state.ip1} onChange={this.onChangeIp1.bind(this)} />
+            <input type="text" className="input-training" value={this.state.ip1} onChange={this.onChangeIp1.bind(this)} />
           </div>
 
           <div className="input-group mb-3 input-form-training">
             <div className="input-group-prepend">
               <span className="input-group-text" >Kết Thúc:</span>
             </div>
-            <input type="text" className="input-training" value={this.state.ip2} onChange={this.onChangeIp1.bind(this)} />
+            <input type="text" className="input-training" value={this.state.ip2} onChange={this.onChangeIp2.bind(this)} />
           </div>
         </div>
 
