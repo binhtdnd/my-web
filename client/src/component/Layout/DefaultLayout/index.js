@@ -1,5 +1,5 @@
-import Header from "./Header";
-import Sidebar from "./Sidebar";
+import Header from "../Items/Header";
+import Sidebar from "../Items/Sidebar";
 
 function DefaultLayout({ children }) {
     return (

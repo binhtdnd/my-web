@@ -11,13 +11,13 @@ class Training extends Component {
       txt2: 'あんしょうばんごう',
       ip1: '1',
       ip2: '50',
-
+      err: '',
       valid: false,
       courses: window.location.pathname.slice(-2),
       tempWord: ['', '暗証番号', 'あんしょうばんごう', 'Mã số định danh cá nhân']
     }
-    this.validateInput = this.validateInput.bind(this)
-    this.fromToBtn = this.fromToBtn.bind(this)
+
+    this.submitHandle = this.submitHandle.bind(this)
   };
 
 
@@ -68,34 +68,42 @@ class Training extends Component {
 
   }
 
-  fromToBtn() {
-    let mess = this.validateInput(this.state.ip1, this.state.ip2)
-    if (mess === 'ok') {
+  submitHandle(e) {
+
+    let error = '';
+    if (this.state.ip1.trim() === '') {
+      error = 'ô Bắt Đầu không được để trống'
+    } else if (this.state.ip2.trim() === '') {
+      error = 'ô Kết Thúc không được để trống'
+    }
+
+    else if (this.state.ip2 < 9) {
+      error = '[Giá trị kết thúc] phải >= 10, hãy nhập lại !!!'
+    } else if (this.state.ip1 < 1) {
+      error = '[Giá trị bắt đầu] phải > 0, hãy nhập lại !!!'
+    } else if (this.state.ip2 - this.state.ip1 < 5) {
+      error = '[Giá trị Kết thúc]  -  [Giá trị Bắt đầu]  phải lớn hơn 10 đơn vị, hãy nhập lại !!!'
+    } else {
       this.setState({
         valid: true
       })
-    } else {
+    }
+
+
+    this.setState({
+      err: error,
+    })
+    if (error !== '') {
       this.setState({
-        ip1: 1,
-        ip2: 50
+        err: error,
+        valid: false
       })
-      alert(mess)
     }
+
+    e.preventDefault()
   }
 
-  validateInput(a, b) {
-    var mess = 'ok'
 
-    if (b < 9) {
-      mess = '[Giá trị kết thúc] phải > 10, hãy nhập lại !!!'
-    } else if (a < 0) {
-      mess = '[Giá trị bắt đầu] phải > 0, hãy nhập lại !!!'
-    } else if (b - a < 5) {
-      mess = '[Giá trị Kết thúc]  -  [Giá trị Bắt đầu]  phải lớn hơn 10 đơn vị, hãy nhập lại !!!'
-    }
-    console.log(mess)
-    return mess
-  }
 
   render() {
 
@@ -143,25 +151,34 @@ class Training extends Component {
 
           </div>
         </form >
-        <div className='input-form-training'>
-          <div className="input-group mb-3 input-form-training">
-            <div className="input-group-prepend">
-              <span className="input-group-text" >Bắt đầu:</span>
+        <form onSubmit={this.submitHandle}>
+          <div className='input-form-training'>
+            <div className="input-group mb-3 input-form-training">
+              <div className="input-group-prepend">
+                <span className="input-group-text" >Bắt đầu:</span>
+              </div>
+              <input type="number" className="input-training" value={this.state.ip1} onChange={this.onChangeIp1.bind(this)} />
             </div>
-            <input type="text" className="input-training" value={this.state.ip1} onChange={this.onChangeIp1.bind(this)} />
-          </div>
 
-          <div className="input-group mb-3 input-form-training">
-            <div className="input-group-prepend">
-              <span className="input-group-text" >Kết Thúc:</span>
+            <div className="input-group mb-3 input-form-training">
+              <div className="input-group-prepend">
+                <span className="input-group-text" >Kết Thúc:</span>
+              </div>
+              <input type="number" className="input-training" value={this.state.ip2} onChange={this.onChangeIp2.bind(this)}
+
+              />
             </div>
-            <input type="text" className="input-training" value={this.state.ip2} onChange={this.onChangeIp2.bind(this)} />
           </div>
-        </div>
+          <div className={`alert alert-danger ${this.state.err === '' ? 'bHidden' : ''}`} role="alert">
+            {this.state.err}
+          </div>
+          <button className='btn btn-primary'>OK</button>
+        </form>
 
 
-        <button onClick={this.fromToBtn} className='btn btn-primary'>OK</button>
-        <Link to={`/training/${this.state.sp1}-${this.state.sp2}-${this.state.ip1 - 1}-${this.state.ip2 - 1}-${this.state.courses}`}
+
+
+        <Link to={`/training/${this.state.sp1}-${this.state.sp2}-${parseInt(this.state.ip1) - 1}-${parseInt(this.state.ip2) - 1}-${this.state.courses}`}
           className={`${this.state.valid ? "bShow" : "bHidden"}`}
         >
           <h2>Go </h2>

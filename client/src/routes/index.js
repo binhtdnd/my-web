@@ -6,6 +6,10 @@ import Training from '../pages/Training'
 import { HeaderOnly } from '../component/Layout'
 import ChiaDongTu from '../pages/ChiaDongTu'
 import Test from '../pages/Test'
+import Login from '../pages/Login'
+import Dashboard from '../component/Dashboard'
+import Preferences from '../component/Preferences/Preferences.js'
+
 
 const publicRoutes = [
     { path: '/', component: Home },
@@ -15,9 +19,9 @@ const publicRoutes = [
     { path: '/training/:slug', component: Training, Layout: HeaderOnly },
     { path: '/chiadongtu/:slug', component: ChiaDongTu },
     { path: '/test', component: Test },
-    { path: '/:slug', component: Home },
-    { path: '/:slug/:slug', component: Home },
-
+    { path: '/login', component: Login, Layout: HeaderOnly },
+    { path: '/dashboard', component: Dashboard },
+    { path: '/preferences', component: Preferences },
 ]
 
 const privateRoutes = [

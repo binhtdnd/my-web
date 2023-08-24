@@ -111,7 +111,7 @@
 }
 
 .input-training {
-  max-width: 50px;
+  max-width: 70px;
   padding-left: 15px;
 }
 
@@ -123,6 +123,38 @@
 
   max-width: 400px;
 
+}
+
+#avatar-icon {
+  max-width: 40px;
+  max-height: 40px;
+}
+
+#form-login {
+  max-width: 400px;
+  background-color: rgba(10, 38, 46, 0.257);
+}
+
+.full-width {
+  display: block;
+  width: 100%;
+}
+
+.red {
+  background-color: red;
+}
+
+
+
+.green {
+  background-color: rgb(0, 255, 55);
+}
+
+input:invalid {
+  background-color: ivory;
+  border: #61dafb;
+  outline: 2px solid red;
+  border-radius: 5px;
 }
 
 /* Mobile: with  <740px*/
