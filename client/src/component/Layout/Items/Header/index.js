@@ -32,7 +32,7 @@ class Header extends Component {
                                 <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/test">Link <span className="sr-only">(current)</span></Link>
+                                <Link className="nav-link" to="/login2">Link <span className="sr-only">(current)</span></Link>
                             </li>
 
                             <li className="nav-item">
@@ -44,7 +44,7 @@ class Header extends Component {
 
                                 <li className="nav-item dropdown">
                                     <a className="nav-link dropdown-toggle" href="/#" role="button" data-toggle="dropdown" aria-expanded="false">
-                                        <img id='avatar-icon' src={`${this.state.loging ? 'img/avatar-icon-in.png' : '/img/avatar-icon.png'}`} className="rounded-circle"
+                                        <img id='avatar-icon' src={`${this.state.loging ? '/img/avatar-icon-in.png' : '/img/avatar-icon.png'}`} className="rounded-circle"
                                             alt='' />
                                     </a>
                                     <div className="dropdown-menu">

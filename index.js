@@ -3,24 +3,32 @@ const mysql = require('mysql2');
 const app = express();
 const bodyParser = require('body-parser')
 const path = require('path')
-
+const cors = require('cors')
 var jsonParser = bodyParser.json()
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 app.use(express.static(path.join(__dirname + "/public")))
-const connection = mysql.createConnection({
-    host: '103.200.23.120',
-    user: 'aliceiov_binhtdnd',
-    password: 'mhbbnsbtcm1!qQbinh',
-    database: 'aliceiov_japan'
-});
+
+app.use(cors())
+app.use('/login', (req, res) => {
+    res.send({
+        token: 'test123'
+    })
+})
 // const connection = mysql.createConnection({
-//     host: 'localhost',
-//     user: 'root',
-//     database: 'japan'
+//     host: '103.200.23.120',
+//     user: 'aliceiov_binhtdnd',
+//     password: 'mhbbnsbtcm1!qQbinh',
+//     database: 'aliceiov_japan'
 // });
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    database: 'japan'
+});
 
 //"proxy": "https://alice-server-lygm.onrender.com"
+
 connection.connect(function (err) {
     (err) ? console.log(err) : console.log("You are connected the [server]!!!" + connection);
 });
@@ -43,7 +51,7 @@ app.get('/api/courses', (req, res) => {
         if (err) throw err;
 
         res.json({ data: results });
-
+        console.log(results)
     });
 
 });
