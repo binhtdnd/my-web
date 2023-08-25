@@ -15,17 +15,17 @@ app.use('/login', (req, res) => {
         token: 'test123'
     })
 })
-// const connection = mysql.createConnection({
-//     host: '103.200.23.120',
-//     user: 'aliceiov_binhtdnd',
-//     password: 'mhbbnsbtcm1!qQbinh',
-//     database: 'aliceiov_japan'
-// });
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    database: 'japan'
+    host: '103.200.23.120',
+    user: 'aliceiov_binhtdnd',
+    password: 'mhbbnsbtcm1!qQbinh',
+    database: 'aliceiov_japan'
 });
+// const connection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     database: 'japan'
+// });
 
 //"proxy": "https://alice-server-lygm.onrender.com"
 
@@ -39,6 +39,23 @@ function get(req, res, next) {
     // ...
 }
 
+app.get('/api/user', (req, res) => {
+    const user = req.query.user
+    const password = req.query.password
+    var sql = "SELECT * FROM user";
+    sql3 = `SELECT * FROM user WHERE userName = binhtd AND passWord = 1!qQbinh`
+    sql2 = `SELECT * FROM user WHERE userName = ${user} AND passWord = ${password}`
+    console.log(sql)
+    console.log(user, '    ', password)
+    connection.query(sql, function (err, results) {
+        if (err) throw err;
+
+        res.json({ data: results });
+
+    });
+
+});
+
 app.get('/api/courses', (req, res) => {
     let params = req.query.foo
 
@@ -51,7 +68,7 @@ app.get('/api/courses', (req, res) => {
         if (err) throw err;
 
         res.json({ data: results });
-        console.log(results)
+
     });
 
 });
