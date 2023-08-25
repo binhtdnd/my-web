@@ -8,10 +8,10 @@ import { DefaultLayout } from './component/Layout';
 import Login3 from './pages/Login3';
 import useToken from './useToken'
 function App() {
-    // const { token, setToken } = useToken()
-    // if (!token) {
-    //     return <Login3 setToken={setToken} />
-    // }
+    const { token, setToken } = useToken()
+    if (false) {
+        return <Login3 setToken={setToken} />
+    }
     return (
 
         <>
