@@ -17,7 +17,7 @@ class Training extends Component {
       ip2: '',
       courses: window.location.pathname,
       tempWord: ['', '暗証番号', 'あんしょうばんごう', 'Mã số định danh cá nhân'],
-      word: [],
+
       step: 0,
       question: '',
       a1: '',
@@ -29,6 +29,7 @@ class Training extends Component {
       stateMean: [],
       check: 0,
       pass: true,
+      scount: 0,
     }
 
   };
@@ -79,23 +80,32 @@ class Training extends Component {
         let lHiragana = []
         let lMean = []
         const data = res.data;
+        let lcount = 0;
         data.data.forEach(element => {
 
 
           lKanji.push(element.kanji)
           lHiragana.push(element.hiragana)
           lMean.push(element.mean)
+          lcount++
         });
-        lKanji.push("Hết rồi, F5 đi, bấm gì nữa")
-        lHiragana.push("Hết rồi, F5 đi, bấm gì nữa")
-        lMean.push("Hết rồi, F5 đi, bấm gì nữa")
+        if (this.state.sp1 === '1') {
+          lKanji.push("Hết rồi, F5 đi, bấm gì nữa")
+        } else if (this.state.sp1 === '2') {
+          lHiragana.push("Hết rồi, F5 đi, bấm gì nữa")
+        } if (this.state.sp1 === '3') {
+          lMean.push("Hết rồi, F5 đi, bấm gì nữa")
+        }
+
+
+
 
         this.setState({
-          word: data.data,
+
           stateKanji: lKanji,
           stateHiragana: lHiragana,
           stateMean: lMean,
-
+          scount: lcount,
         }, () => {
           this.afterSetStateFinished();
         }
@@ -153,7 +163,7 @@ class Training extends Component {
 
     if (isRd) {
       do {
-        st = this.getRandomIntInclusive(0, this.state.ip2 - this.state.ip1)
+        st = this.getRandomIntInclusive(0, this.state.scount)
       } while (parseInt(st) === parseInt(step) || parseInt(st) === parseInt(this.state.rd));
     }
 

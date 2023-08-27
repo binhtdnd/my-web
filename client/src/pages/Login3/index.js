@@ -3,12 +3,14 @@ import { useState } from 'react';
 import axios from 'axios';
 
 async function loginUser(credentials) {
+    alert('cre: ', credentials)
     return fetch('http://localhost:4000/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(credentials)
+        body: JSON.stringify(credentials),
+
     })
         .then(data => data.json())
 }
@@ -16,8 +18,8 @@ async function loginUser(credentials) {
 export default function Login3({ setToken }) {
 
 
-    const [username, setUserName] = useState();
-    const [password, setPasssWord] = useState();
+    const [username, setUserName] = useState(1);
+    const [password, setPasssWord] = useState(2);
 
 
 
@@ -45,7 +47,7 @@ export default function Login3({ setToken }) {
 
 
         setToken(token);
-
+        
     }
 
 
