@@ -5,13 +5,12 @@ import { publicRoutes } from './routes'
 
 import { DefaultLayout } from './component/Layout';
 
-import Login3 from './pages/Login3';
+import Login from './pages/Login';
 import useToken from './useToken'
 function App() {
     const { token, setToken } = useToken()
-    if (false) {
-        return <Login3 setToken={setToken} />
-    }
+
+
     return (
 
         <>
@@ -27,10 +26,19 @@ function App() {
                                 Layout = Fragment
                             }
 
-                            return <Route key={index} path={route.path} element={
-                                <Layout>
-                                    <Page setToken={setToken} />
-                                </Layout>} />
+                            if (!token && route.needLogin) {
+                                return <Route key={index} path={route.path} element={
+                                    <Login setToken={setToken} />
+                                } />
+                            } else {
+                                return <Route key={index} path={route.path} element={
+                                    <Layout>
+                                        <Page setToken={setToken} />
+                                    </Layout>
+                                } />
+                            }
+
+
                         })
                         }
                     </Routes>

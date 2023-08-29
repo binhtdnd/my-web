@@ -7,6 +7,7 @@ const cors = require('cors')
 var jsonParser = bodyParser.json()
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
+
 app.use(express.static(path.join(__dirname + "/public")))
 
 app.use(cors())
@@ -14,7 +15,7 @@ app.use('/login', (req, res) => {
     res.send({
         token: 'test123'
     })
-    console.log('body ', req.p)
+
 })
 const connection = mysql.createConnection({
     host: '103.200.23.120',
@@ -41,13 +42,31 @@ function get(req, res, next) {
 }
 
 app.get('/api/user', (req, res) => {
-    const user = req.query.user
-    const password = req.query.password
-    var sql = "SELECT * FROM user";
-    sql3 = `SELECT * FROM user WHERE userName = binhtd AND passWord = 1!qQbinh`
-    sql2 = `SELECT * FROM user WHERE userName = ${user} AND passWord = ${password}`
-    console.log(sql)
-    console.log(user, '    ', password)
+    let username = req.query.username;
+    let password = req.query.password;
+
+    var sql = "SELECT * FROM user ";
+
+
+    sql = "SELECT * FROM user WHERE username = '" + username + "' and password = '" + password + "'"
+
+    connection.query(sql, function (err, results) {
+        if (err) throw err;
+
+        res.json({ data: results });
+
+    });
+
+});
+app.get('/api/creatUser', (req, res) => {
+    let username = req.query.username;
+    let password = req.query.password;
+
+    var sql = "SELECT * FROM user ";
+
+    sql = "INSERT INTO user (username,password) VALUES ('" + username + "','" + 1 + "')";
+
+
     connection.query(sql, function (err, results) {
         if (err) throw err;
 
