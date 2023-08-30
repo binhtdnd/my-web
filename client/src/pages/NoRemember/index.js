@@ -42,7 +42,6 @@ class Word extends Component {
   onClickDeleteALL(e) {
     e.preventDefault();
     localStorage.removeItem(window.location.pathname.slice(-2));
-    window.location.reload();
   }
   onClickDelete(e, stt) {
 
@@ -98,7 +97,7 @@ class Word extends Component {
               <td>
                 <Link to='/'>
                   <button className='btn btn-warning'
-                    onClick={(event) => this.onClickDeleteALL(event, item.stt)}
+                    onClick={(event) => this.onClickDeleteALL(event)}
                   >Xóa Tất Cả </button>
                 </Link>
               </td>

@@ -47,7 +47,7 @@ export default function Login({ setToken }) {
 
                     setToken(token);
                 } else {
-                    alert('wrong')
+                    alert('Sai tên đăng nhập hoặc Mật khẩu !!!')
                 }
             })
             .catch(function (error) {
@@ -77,7 +77,7 @@ export default function Login({ setToken }) {
                     axios
                         .request(optionPost)
                         .then(async function (response) {
-                            alert('create OK')
+                            alert('Đã tạo thành công!')
                             setLoginSwitch(true)
 
                         })
@@ -87,7 +87,7 @@ export default function Login({ setToken }) {
                         });
 
                 } else {
-                    alert('tdn da ton tai')
+                    alert('Tên đăng nhập đã tồn tại')
                 }
             })
             .catch(function (error) {
