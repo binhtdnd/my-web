@@ -39,7 +39,11 @@ class Word extends Component {
     }
 
   };
-
+  onClickDeleteALL(e) {
+    e.preventDefault();
+    localStorage.removeItem(window.location.pathname.slice(-2));
+    window.location.reload();
+  }
   onClickDelete(e, stt) {
 
     let st = localStorage.getItem(window.location.pathname.slice(-2))
@@ -91,7 +95,9 @@ class Word extends Component {
               <th scope='col'>Nghĩa</th>
               <th scope='col'>Hiragana</th>
               <th scope='col'>Kanji</th>
-
+              <td><button type="button" className="btn btn-outline-warning"
+                onClick={(event) => this.onClickDeleteALL(event)}
+              >Xóa Tất Cả</button></td>
             </tr>
           </thead>
 
