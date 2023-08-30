@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class NoRemember extends Component {
+class Word extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,9 +13,10 @@ class NoRemember extends Component {
   componentDidMount() {
 
 
-    axios.get(`/api/words`, {
+    axios.get(`/api/noremember`, {
       params: {
         courses: window.location.pathname.slice(-2),
+        listNoRemember: localStorage.getItem(window.location.pathname.slice(-2))
       }
     })
       .then(res => {
@@ -85,4 +86,4 @@ class NoRemember extends Component {
   }
 };
 
-export default NoRemember;
+export default Word;

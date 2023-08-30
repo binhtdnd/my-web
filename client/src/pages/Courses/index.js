@@ -49,14 +49,18 @@ class Courses extends Component {
               </div>
               <hr className="divider" />
 
-              <div className="row mb-2 inline">
-                <div className="col-4 disabled">
+              <div className="row mb-2 inline d-flex">
+                <div className="col-3 disabled">
                   <Link to={`/words/${item.name}`} className='disabled'>
                     <label className='lb lb-primary '>Từ Vựng</label>
                   </Link>
                 </div>
-
-                <div className="col-4">
+                <div className="col-3">
+                  <Link to={`/noremember/${item.name}`}>
+                    <button className='btn btn-success'>Chưa Thuộc</button>
+                  </Link>
+                </div>
+                <div className="col-3 ml-5">
                   <Link to={`/option-training/${item.name}`}>
                     <button className='btn btn-primary'>Luyện Tập</button>
                   </Link>

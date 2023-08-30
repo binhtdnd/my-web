@@ -123,12 +123,32 @@ app.get('/api/words', (req, res) => {
     let sp2 = req.query.sp2
     let ip1 = req.query.ip1
     let ip2 = req.query.ip2
-
     var sql = `SELECT * FROM ${courses}`;
 
     if (ip1) {
         sql = `SELECT * FROM ${courses} where stt >= ${ip1} && stt<= ${ip2}`
     }
+    connection.query(sql, function (err, results) {
+        if (err) throw err;
+
+        res.json({ data: results });
+
+    });
+});
+app.get('/api/noremember', (req, res) => {
+
+    let courses = req.query.courses
+    let listSt = req.query.listNoRemember
+    console.log('list st1:', listSt)
+    listSt = req.query.listNoRemember.slice(1)
+    console.log('list st2:', listSt)
+    var sql = `SELECT * FROM ${courses}`;
+
+
+
+    sql = `SELECT * FROM ${courses} WHERE stt in (${listSt})`
+
+
     connection.query(sql, function (err, results) {
         if (err) throw err;
 
