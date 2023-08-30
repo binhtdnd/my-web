@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import { Link } from 'react-router-dom';
 class Word extends Component {
   constructor(props) {
     super(props);
@@ -95,9 +95,13 @@ class Word extends Component {
               <th scope='col'>Nghĩa</th>
               <th scope='col'>Hiragana</th>
               <th scope='col'>Kanji</th>
-              <td><button type="button" className="btn btn-outline-warning"
-                onClick={(event) => this.onClickDeleteALL(event)}
-              >Xóa Tất Cả</button></td>
+              <td>
+                <Link to='/'>
+                  <button className='btn btn-warning'>Xóa Tất Cả </button>
+                </Link>
+              </td>
+
+
             </tr>
           </thead>
 
