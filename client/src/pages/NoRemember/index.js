@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+
 class Word extends Component {
   constructor(props) {
     super(props);
@@ -42,6 +42,7 @@ class Word extends Component {
   onClickDeleteALL(e) {
     e.preventDefault();
     localStorage.removeItem(window.location.pathname.slice(-2));
+    e.target.parentNode.parentNode.parentNode.parentNode.className = 'bHidden'
   }
   onClickDelete(e, stt) {
 
@@ -95,11 +96,11 @@ class Word extends Component {
               <th scope='col'>Hiragana</th>
               <th scope='col'>Kanji</th>
               <td>
-                <Link to='/'>
-                  <button className='btn btn-warning'
-                    onClick={(event) => this.onClickDeleteALL(event)}
-                  >Xóa Tất Cả </button>
-                </Link>
+
+                <button className='btn btn-warning'
+                  onClick={(event) => this.onClickDeleteALL(event)}
+                >Xóa Tất Cả </button>
+
               </td>
 
 
