@@ -123,7 +123,7 @@ class Training extends Component {
   }
 
   onClickSave(e) {
-    // console.log(parseInt(this.state.step) + parseInt(this.state.ip1))
+
     let st = localStorage.getItem(window.location.pathname.slice(-2))
 
     if (!st) {

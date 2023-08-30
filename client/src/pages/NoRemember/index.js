@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class Word extends Component {
+class NoRemember extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,7 +11,6 @@ class Word extends Component {
   };
 
   componentDidMount() {
-
 
     axios.get(`/api/noremember`, {
       params: {
@@ -27,10 +26,7 @@ class Word extends Component {
 
     let st = localStorage.getItem(window.location.pathname.slice(-2))
 
-    if (!st) {
-
-
-    } else {
+    if (st) {
       let temp = st.split(',')
       temp = temp.filter((value, index, array) =>
         array.indexOf(value) === index
@@ -64,26 +60,7 @@ class Word extends Component {
     e.preventDefault();
   }
 
-  renderSwitch(param) {
-    switch (param) {
-      case '1':
-        return 'I';
-      case '2':
-        return 'II';
-      case '3':
-        return 'III';
-      case 'N':
-        return 'Noun';
-      case 'A':
-        return 'Adjective';
-      default:
-        return '';
-    }
-  }
-
   render() {
-
-
 
     return (
       <>
@@ -131,4 +108,4 @@ class Word extends Component {
   }
 };
 
-export default Word;
+export default NoRemember;

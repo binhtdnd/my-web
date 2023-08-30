@@ -69,8 +69,8 @@ class Training extends Component {
   }
 
   submitHandle(e) {
-    const tokenString = sessionStorage.getItem('token')
-    console.log(tokenString)
+
+
     let error = '';
     if (this.state.ip1.trim() === '') {
       error = 'ô Bắt Đầu không được để trống'

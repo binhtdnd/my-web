@@ -7,7 +7,6 @@ import Training from '../pages/Training'
 import { HeaderOnly } from '../component/Layout'
 import ChiaDongTu from '../pages/ChiaDongTu'
 
-import Login from '../pages/Login'
 
 
 
@@ -16,11 +15,9 @@ const publicRoutes = [
     { path: '/courses/:slug', component: Courses },
     { path: '/words/:slug', component: Word, layout: HeaderOnly },
     { path: '/noremember/:slug', component: NoRemember, layout: HeaderOnly },
-    { path: '/option-training/:slug', component: OptionTraining, needLogin: true },
+    { path: '/option-training/:slug', component: OptionTraining },
     { path: '/training/:slug', component: Training, layout: HeaderOnly },
-    { path: '/chiadongtu/:slug', component: ChiaDongTu, needLogin: true },
-
-    { path: '/login', component: Login, layout: HeaderOnly },
+    { path: '/chiadongtu/:slug', component: ChiaDongTu },
 
 ]
 

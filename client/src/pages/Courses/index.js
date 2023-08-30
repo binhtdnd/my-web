@@ -7,7 +7,6 @@ class Courses extends Component {
     super(props);
     this.state = {
       courses: [],
-      user: '',
     }
   };
 

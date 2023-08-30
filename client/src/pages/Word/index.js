@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class NoRemember extends Component {
+class Word extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,27 +28,7 @@ class NoRemember extends Component {
   };
 
 
-
-  renderSwitch(param) {
-    switch (param) {
-      case '1':
-        return 'I';
-      case '2':
-        return 'II';
-      case '3':
-        return 'III';
-      case 'N':
-        return 'Noun';
-      case 'A':
-        return 'Adjective';
-      default:
-        return '';
-    }
-  }
-
   render() {
-
-
 
     return (
       <>
@@ -85,4 +65,4 @@ class NoRemember extends Component {
   }
 };
 
-export default NoRemember;
+export default Word;
