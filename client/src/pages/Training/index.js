@@ -146,6 +146,15 @@ class Training extends Component {
 
     e.preventDefault();
   }
+  onClickNext(e) {
+    this.setState({
+      step: this.state.step + 1
+    }, () => {
+      this.afterSetStateFinished();
+    })
+
+    e.preventDefault();
+  }
 
   onClickBtn1(event, param) {
 
@@ -261,8 +270,11 @@ class Training extends Component {
         </div>
 
         <div className='footer-btn d-flex justify-content-between mt-5'>
-          <button className='btn btn-primary' onClick={(event) => this.onClickBack(event)}>Quay Lại</button>
-          <button className='btn btn-success' onClick={(event) => this.onClickSave(event)}>Lưu Lại</button>
+          <div>
+            <button className='btn btn-primary' onClick={(event) => this.onClickBack(event)}>Quay Lại</button>
+            <button className='btn btn-success ml-2' onClick={(event) => this.onClickNext(event)}>Bỏ Qua</button>
+          </div>
+          <button className='btn btn-warning' onClick={(event) => this.onClickSave(event)}>Lưu Lại</button>
         </div>
 
 
