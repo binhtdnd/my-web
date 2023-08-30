@@ -97,7 +97,9 @@ class Word extends Component {
               <th scope='col'>Kanji</th>
               <td>
                 <Link to='/'>
-                  <button className='btn btn-warning'>Xóa Tất Cả </button>
+                  <button className='btn btn-warning'
+                    onClick={(event) => this.onClickDeleteALL(event, item.stt)}
+                  >Xóa Tất Cả </button>
                 </Link>
               </td>
 
