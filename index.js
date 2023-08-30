@@ -9,25 +9,32 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 
 app.use(express.static(path.join(__dirname + "/public")))
+app.use(express.urlencoded({ extended: true }));
+
+// parse application/json
+app.use(express.json());
 
 app.use(cors())
 app.use('/login', (req, res) => {
+    let tem = { username: req.body.username, role: req.body.role }
+
+
     res.send({
-        token: 'test123'
+        token: tem
     })
 
 })
-const connection = mysql.createConnection({
-    host: '103.200.23.120',
-    user: 'aliceiov_binhtdnd',
-    password: 'mhbbnsbtcm1!qQbinh',
-    database: 'aliceiov_japan'
-});
 // const connection = mysql.createConnection({
-//     host: 'localhost',
-//     user: 'root',
-//     database: 'japan'
+//     host: '103.200.23.120',
+//     user: 'aliceiov_binhtdnd',
+//     password: 'mhbbnsbtcm1!qQbinh',
+//     database: 'aliceiov_japan'
 // });
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    database: 'japan'
+});
 
 //"proxy": "https://alice-server-lygm.onrender.com"
 
@@ -44,7 +51,6 @@ function get(req, res, next) {
 app.get('/api/user', (req, res) => {
     let username = req.query.username;
     let password = req.query.password;
-
     var sql = "SELECT * FROM user ";
 
 
@@ -58,13 +64,30 @@ app.get('/api/user', (req, res) => {
     });
 
 });
-app.get('/api/creatUser', (req, res) => {
+app.get('/api/userForCreate', (req, res) => {
+    let username = req.query.username;
+    let password = req.query.password;
+    var sql = "SELECT * FROM user ";
+
+
+    sql = "SELECT username FROM user WHERE username = '" + username + "'"
+
+    connection.query(sql, function (err, results) {
+        if (err) throw err;
+
+        res.json({ data: results });
+
+    });
+
+});
+
+app.get('/api/createuser', (req, res) => {
     let username = req.query.username;
     let password = req.query.password;
 
     var sql = "SELECT * FROM user ";
 
-    sql = "INSERT INTO user (username,password) VALUES ('" + username + "','" + 1 + "')";
+    sql = "INSERT INTO user (username,password) VALUES ('" + username + "','" + password + "')";
 
 
     connection.query(sql, function (err, results) {

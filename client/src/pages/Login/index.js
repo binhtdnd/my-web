@@ -4,12 +4,13 @@ import axios from 'axios';
 
 async function loginUser(credentials) {
 
+
     return fetch('http://localhost:4000/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(credentials),
+        body: JSON.stringify(credentials)
 
     })
         .then(data => data.json())
@@ -35,13 +36,15 @@ export default function Login({ setToken }) {
         axios
             .request(options)
             .then(async function (response) {
-                console.log(response.data.data.length)
-                if (response.data.data.length > 0) {
 
+                if (response.data.data.length > 0) {
+                    let role = response.data.data[0].role
                     const token = await loginUser({
                         username,
-                        password
+                        password,
+                        role
                     });
+
                     setToken(token);
                 } else {
                     alert('wrong')
@@ -58,20 +61,31 @@ export default function Login({ setToken }) {
 
         const options = {
             method: 'GET',
-            url: '/api/createUser',
-            params: { username, password },
+            url: '/api/userForCreate',
+            params: { username },
         }
         axios
             .request(options)
             .then(async function (response) {
-                console.log(response.data.data.length)
-                if (response.data.data.length === 0) {
 
-                    const token = await loginUser({
-                        username,
-                        password
-                    });
-                    setToken(token);
+                if (response.data.data.length === 0) {
+                    const optionPost = {
+                        method: 'GET',
+                        url: '/api/createuser',
+                        params: { username, password },
+                    }
+                    axios
+                        .request(optionPost)
+                        .then(async function (response) {
+                            alert('create OK')
+                            setLoginSwitch(true)
+
+                        })
+                        .catch(function (error) {
+                            console.error(error);
+
+                        });
+
                 } else {
                     alert('tdn da ton tai')
                 }
@@ -85,32 +99,7 @@ export default function Login({ setToken }) {
 
     return (
         <>
-            {/* <div className='container-login' id='container-login'>
-                <form >
-                    <div className="form-group">
-                        <label htmlFor="exampleInputEmail1">Email address</label>
-                        <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
-                            onChange={e => setUserName(e.target.value)}
-                        />
 
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="exampleInputPassword1">Password</label>
-                        <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"
-                            onChange={e => setPasssWord(e.target.value)}
-                        />
-                    </div>
-                    <div className="form-group form-check">
-                        <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                        <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
-                    </div>
-
-                </form>
-                <button type="GET" className="btn btn-primary"
-                    onClick={handleSubmit}
-                >Submit</button>
-            </div>
-*/}
             <div id='form-login' className='container mt-3'>
 
 
@@ -120,14 +109,14 @@ export default function Login({ setToken }) {
                             <button type="button" className={`btn full-width ${loginSwitch ? 'btn-primary' : 'btn-light'}`}
                                 onClick={(event) => setLoginSwitch(true)}
                             >
-                                Login
+                                Đăng nhập
                             </button>
                         </div>
                         <div className="col-sm-6 d-inline">
                             <button type="button" className={`btn full-width ${loginSwitch ? 'btn-light' : 'btn-success'}`}
                                 onClick={(event) => setLoginSwitch(false)}
                             >
-                                Register
+                                Đăng ký
                             </button>
                         </div>
 

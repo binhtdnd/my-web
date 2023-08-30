@@ -13,6 +13,7 @@ class Header extends Component {
         this.setState({
             loging: false
         })
+        sessionStorage.removeItem('token');
     }
 
     render() {

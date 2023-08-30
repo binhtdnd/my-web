@@ -13,7 +13,7 @@ class Training extends Component {
       txt2: 'あんしょうばんごう',
       ipStart: '',
       ipEnd: '',
-      ip1: '',
+      ip1: 0,
       ip2: '',
       courses: window.location.pathname,
       tempWord: ['', '暗証番号', 'あんしょうばんごう', 'Mã số định danh cá nhân'],
@@ -30,6 +30,7 @@ class Training extends Component {
       check: 0,
       pass: true,
       scount: 0,
+      noRemember: []
     }
 
   };
@@ -56,10 +57,10 @@ class Training extends Component {
     this.setState({
       sp1: sString[0],
       sp2: sString[1],
-      ip1: sString[2],
+      ip1: Number.parseInt(sString[2]),
       ip2: sString[3],
       courses: sString[4],
-
+      noRemember: localStorage.getItem(sString[4]),
     })
 
 
@@ -119,6 +120,26 @@ class Training extends Component {
 
   subtract(a, b) {
     return (a - b);
+  }
+
+  onClickSave(e) {
+    // console.log(parseInt(this.state.step) + parseInt(this.state.ip1))
+    let temp = []
+    temp.push(localStorage.getItem(this.state.courses))
+
+    console.log(temp)
+    temp.push(this.state.step + this.state.ip1)
+    localStorage.setItem(this.state.courses, temp)
+    e.preventDefault();
+  }
+  onClickBack(e) {
+    this.setState({
+      step: this.state.step - 1
+    }, () => {
+      this.afterSetStateFinished();
+    })
+
+    e.preventDefault();
   }
 
   onClickBtn1(event, param) {
@@ -203,7 +224,7 @@ class Training extends Component {
               {this.state.question}
             </span>
           </div>
-          <br />
+
 
           <div className="form-check div-inputRadio radio-left" onClick={(event) => this.onClickBtn1(event, 1)}>
             <label className="form-check-label" >
@@ -234,7 +255,10 @@ class Training extends Component {
           <span className="badge badge-danger radio-left">{this.state.step - (this.state.ip2 - this.state.ip1) > 1 ? 'Đã bảo hết rồi (◣_◢)' : ''}</span>
         </div>
 
-
+        <div className='footer-btn d-flex justify-content-between mt-5'>
+          <button className='btn btn-primary' onClick={(event) => this.onClickBack(event)}>Quay Lại</button>
+          <button className='btn btn-success' onClick={(event) => this.onClickSave(event)}>Lưu Lại</button>
+        </div>
 
 
 
