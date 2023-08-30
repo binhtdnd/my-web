@@ -24,17 +24,17 @@ app.use('/login', (req, res) => {
     })
 
 })
-// const connection = mysql.createConnection({
-//     host: '103.200.23.120',
-//     user: 'aliceiov_binhtdnd',
-//     password: 'mhbbnsbtcm1!qQbinh',
-//     database: 'aliceiov_japan'
-// });
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    database: 'japan'
+    host: '103.200.23.120',
+    user: 'aliceiov_binhtdnd',
+    password: 'mhbbnsbtcm1!qQbinh',
+    database: 'aliceiov_japan'
 });
+// const connection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     database: 'japan'
+// });
 
 //"proxy": "https://alice-server-lygm.onrender.com"
 // "proxy": "https://my-web-08h7.onrender.com"
