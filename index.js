@@ -138,17 +138,9 @@ app.get('/api/words', (req, res) => {
 app.get('/api/noremember', (req, res) => {
 
     let courses = req.query.courses
-    let listSt = req.query.listNoRemember
-    console.log('list st1:', listSt)
-    listSt = req.query.listNoRemember.slice(1)
-    console.log('list st2:', listSt)
+    listSt = req.query.listNoRemember
     var sql = `SELECT * FROM ${courses}`;
-
-
-
     sql = `SELECT * FROM ${courses} WHERE stt in (${listSt})`
-
-
     connection.query(sql, function (err, results) {
         if (err) throw err;
 

@@ -124,12 +124,17 @@ class Training extends Component {
 
   onClickSave(e) {
     // console.log(parseInt(this.state.step) + parseInt(this.state.ip1))
-    let temp = []
-    temp.push(localStorage.getItem(this.state.courses))
+    let st = localStorage.getItem(window.location.pathname.slice(-2))
 
-    console.log(temp)
-    temp.push(this.state.step + this.state.ip1)
-    localStorage.setItem(this.state.courses, temp)
+    if (!st) {
+      localStorage.setItem(this.state.courses, this.state.step + this.state.ip1)
+    } else {
+      let temp = st.split(',')
+
+      temp.push(this.state.step + this.state.ip1)
+      localStorage.setItem(this.state.courses, temp)
+    }
+
     e.preventDefault();
   }
   onClickBack(e) {

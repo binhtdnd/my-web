@@ -25,10 +25,33 @@ class Word extends Component {
       })
       .catch(error => console.log(error));
 
-
+    let st = localStorage.getItem(window.location.pathname.slice(-2))
+    let temp = st.split(',')
+    temp = temp.filter((value, index, array) =>
+      array.indexOf(value) === index
+    )
+    localStorage.setItem(window.location.pathname.slice(-2), temp)
   };
 
+  onClickDelete(e, stt) {
 
+    let st = localStorage.getItem(window.location.pathname.slice(-2))
+    let temp = st.split(',')
+
+    temp = temp.filter((value, index, array) =>
+      array.indexOf(value) === index
+    )
+
+    var index = temp.indexOf(stt.toString());
+    temp.splice(index, 1);
+
+
+
+    localStorage.setItem(window.location.pathname.slice(-2), temp)
+
+    e.target.parentNode.parentNode.className = 'bHidden'
+    e.preventDefault();
+  }
 
   renderSwitch(param) {
     switch (param) {
@@ -68,11 +91,14 @@ class Word extends Component {
           <tbody>
             {this.state.word.map(item => (
 
-              <tr className='tr-list-word' key={item.stt}>
+              <tr className='tr-list-word ' key={item.stt}>
                 <th scope='row'>{item.stt}</th>
                 <td>{item.kanji}</td>
                 <td>{item.hiragana}</td>
                 <td>{item.mean}</td>
+                <td><button type="button" className="btn btn-outline-warning"
+                  onClick={(event) => this.onClickDelete(event, item.stt)}
+                >Xóa</button></td>
 
               </tr>
             ))}
