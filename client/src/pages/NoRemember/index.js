@@ -26,11 +26,18 @@ class Word extends Component {
       .catch(error => console.log(error));
 
     let st = localStorage.getItem(window.location.pathname.slice(-2))
-    let temp = st.split(',')
-    temp = temp.filter((value, index, array) =>
-      array.indexOf(value) === index
-    )
-    localStorage.setItem(window.location.pathname.slice(-2), temp)
+
+    if (!st) {
+
+
+    } else {
+      let temp = st.split(',')
+      temp = temp.filter((value, index, array) =>
+        array.indexOf(value) === index
+      )
+      localStorage.setItem(window.location.pathname.slice(-2), temp)
+    }
+
   };
 
   onClickDelete(e, stt) {
