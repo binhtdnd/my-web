@@ -31,23 +31,6 @@ class Home extends Component {
 
 
 
-    downloadWord(event) {
-        var st = event.target.name
-        axios.get(`/api/words/${st}`)
-            .then(res => {
-                const data = res.data;
-                this.setState({
-                    word: data.data
-                });
-            })
-            .catch(error => console.log(error));
-
-        window.localStorage.setItem(st + "isDownload", 'true')
-
-        console.log('hhi ' + st)
-        event.preventDefault()
-    }
-
     render() {
 
 

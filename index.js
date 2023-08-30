@@ -12,18 +12,25 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(cors())
-
-// const connection = mysql.createConnection({
+// this.pool = mysql.createPool({
+//     connectionLimit: 10,
 //     host: '103.200.23.120',
 //     user: 'aliceiov_binhtdnd',
 //     password: 'mhbbnsbtcm1!qQbinh',
-//     database: 'aliceiov_japan'
+//     database: 'aliceiov_japan',
+//     port: '8889'
 // });
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    database: 'japan'
+    host: '103.200.23.120',
+    user: 'aliceiov_binhtdnd',
+    password: 'mhbbnsbtcm1!qQbinh',
+    database: 'aliceiov_japan'
 });
+// const connection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     database: 'japan'
+// });
 
 //"proxy": "https://alice-server-lygm.onrender.com"
 // "proxy": "https://my-web-08h7.onrender.com"
@@ -37,22 +44,6 @@ function get(req, res, next) {
     // ...
 }
 
-app.get('/api/user', (req, res) => {
-    let username = req.query.username;
-    let password = req.query.password;
-    var sql = "SELECT * FROM user ";
-
-
-    sql = "SELECT * FROM user WHERE username = '" + username + "' and password = '" + password + "'"
-
-    connection.query(sql, function (err, results) {
-        if (err) throw err;
-
-        res.json({ data: results });
-
-    });
-
-});
 
 
 app.get('/api/courses', (req, res) => {
