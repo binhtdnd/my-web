@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import axios from 'axios';
-//import $ from 'jquery';
+import { toast } from 'react-toastify';
 
 class Training extends Component {
   constructor(props) {
@@ -134,10 +134,20 @@ class Training extends Component {
       temp.push(this.state.step + this.state.ip1)
       localStorage.setItem(this.state.courses, temp)
     }
-
+    toast('🦄 Đã chuyển tới mục <Chưa thuộc>', {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
     e.preventDefault();
   }
   onClickBack(e) {
+
     this.setState({
       step: this.state.step - 1
     }, () => {
@@ -147,6 +157,7 @@ class Training extends Component {
     e.preventDefault();
   }
   onClickNext(e) {
+
     this.setState({
       step: this.state.step + 1
     }, () => {

@@ -12,25 +12,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(cors())
-// this.pool = mysql.createPool({
-//     connectionLimit: 10,
+
+// const connection = mysql.createConnection({
 //     host: '103.200.23.120',
 //     user: 'aliceiov_binhtdnd',
 //     password: 'mhbbnsbtcm1!qQbinh',
-//     database: 'aliceiov_japan',
-//     port: '8889'
+//     database: 'aliceiov_japan'
 // });
 const connection = mysql.createConnection({
-    host: '103.200.23.120',
-    user: 'aliceiov_binhtdnd',
-    password: 'mhbbnsbtcm1!qQbinh',
-    database: 'aliceiov_japan'
+    host: 'localhost',
+    user: 'root',
+    database: 'japan'
 });
-// const connection = mysql.createConnection({
-//     host: 'localhost',
-//     user: 'root',
-//     database: 'japan'
-// });
 
 //"proxy": "https://alice-server-lygm.onrender.com"
 // "proxy": "https://my-web-08h7.onrender.com"
