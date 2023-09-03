@@ -167,8 +167,24 @@ class Training extends Component {
     })
     e.preventDefault()
   }
+  onClickMean(e) {
+    toast(this.state.stateMean[this.state.step], {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+    e.preventDefault()
 
+
+  }
   onClickHV(e) {
+
+
     toast(this.state.stateHV[this.state.step], {
       position: "top-right",
       autoClose: 1500,
@@ -367,6 +383,7 @@ class Training extends Component {
         {/* Han Viet */}
         <div className='footer-btn d-flex justify-content-center mt-3 align-items-center '>
           <button className='btn btn-dark ml-2' onClick={(event) => this.onClickHV(event)}>Hán Việt{'\u00A0'}</button>
+          <button className='btn btn-light ml-2' onClick={(event) => this.onClickMean(event)}>Nghĩa{'\u00A0'}</button>
 
           <button className={`btn ml-2 ${this.state.isOnlyKanji ? 'btn-dark' : 'btn-primary'}`} onClick={(event) => this.onClickOnlyKanji(event)}>
             {this.state.isOnlyKanji ? '食' : '食べる'}
