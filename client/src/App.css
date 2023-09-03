@@ -48,6 +48,8 @@
   font-size: 3rem;
 }
 
+
+
 /* training radio */
 
 
@@ -168,6 +170,26 @@ input:invalid {
 }
 
 
+.modal-container {
+  position: relative;
+}
+
+.modal-container .modal,
+.modal-container .modal-backdrop {
+  position: absolute;
+}
+
+#training-content #label-note {
+
+  font-size: 1.2rem;
+
+}
+
+#exampleCheck1 {
+  height: 25px;
+  width: 25px;
+  margin-right: 20px;
+}
 
 /* Mobile: with  <740px*/
 @media only screen and (max-width:46.1875em) {

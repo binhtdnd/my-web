@@ -14,6 +14,7 @@
     "netlify-cli": "^16.1.0",
     "react": "^18.2.0",
     "react-bootstrap": "^0.32.1",
+    "react-bootstrap-validation": "^0.1.11",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.2",
     "react-scripts": "5.0.1",
@@ -46,5 +47,9 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://my-web-08h7.onrender.com"
+  "proxy": "https://alice-21e1.onrender.com/",
+  "devDependencies": {
+    "@types/bootstrap": "^5.2.6",
+    "@types/react-bootstrap": "^0.32.32"
+  }
 }

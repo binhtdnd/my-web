@@ -4,6 +4,8 @@ import { publicRoutes } from './routes'
 import { DefaultLayout } from './component/Layout';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+
+
 function App() {
 
     return (
@@ -30,6 +32,7 @@ function App() {
                 </div>
 
             </Router>
+
             <ToastContainer
                 position="top-right"
                 autoClose={5000}

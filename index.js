@@ -25,8 +25,8 @@ const connection = mysql.createConnection({
 //     database: 'japan'
 // });
 
-//"proxy": "https://alice-server-lygm.onrender.com"
-// "proxy": "https://my-web-08h7.onrender.com"
+
+// "proxy": "https://alice-21e1.onrender.com/"
 connection.connect(function (err) {
     (err) ? console.log(err) : console.log("You are connected the [server]!!!" + connection);
 });
