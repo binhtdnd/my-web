@@ -13,17 +13,17 @@ app.use(express.json());
 
 app.use(cors())
 
-// const connection = mysql.createConnection({
-//     host: '103.200.23.120',
-//     user: 'aliceiov_binhtdnd',
-//     password: 'mhbbnsbtcm1!qQbinh',
-//     database: 'aliceiov_japan'
-// });
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    database: 'japan'
+    host: '103.200.23.120',
+    user: 'aliceiov_binhtdnd',
+    password: 'mhbbnsbtcm1!qQbinh',
+    database: 'aliceiov_japan'
 });
+// const connection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     database: 'japan'
+// });
 
 
 // "proxy": "https://alice-21e1.onrender.com/"
@@ -38,23 +38,6 @@ function get(req, res, next) {
 }
 
 
-
-app.get('/api/courses', (req, res) => {
-    let params = req.query.foo
-
-    var sql = "SELECT * FROM courses";
-
-    if (params) {
-        sql = "SELECT * FROM courses where name = '" + params + "'"
-    }
-    connection.query(sql, function (err, results) {
-        if (err) throw err;
-
-        res.json({ data: results });
-
-    });
-
-});
 
 app.get('/api/words', (req, res) => {
 

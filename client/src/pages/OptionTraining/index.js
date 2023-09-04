@@ -114,7 +114,7 @@ class Training extends Component {
       <div className="container mt-4 " >
         <form method="GET" onSubmit={(e) => { this.doSomething() }}>
           <div className="form-group">
-            <div className="row justify-content-md-center">
+            <div className="row justify-content-md-center ">
               <div className="col-sm-4 p-3 mb-2 bg-primary text-white">
 
                 <ul className="list-group list-group-flush">
@@ -135,12 +135,9 @@ class Training extends Component {
                   </li>
 
                 </ul>
-
-
-
               </div>
 
-              <div className="col-sm-4 p-3 mb-2 bg-secondary text-white">
+              <div className="col-sm-4 p-3 mb-2 bg-secondary text-black">
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item mt-2" id="txt1">{this.state.txt1}</li>
                   <li className="list-group-item mt-2" id="txt2">{this.state.txt2}</li>
@@ -153,20 +150,15 @@ class Training extends Component {
           </div>
         </form >
         <form onSubmit={this.submitHandle}>
-          <div className='input-form-training'>
-            <div className="input-group mb-3 input-form-training">
-              <div className="input-group-prepend">
-                <span className="input-group-text" >Bắt đầu:</span>
-              </div>
+          <div className='input-form-training d-flex flex-column justify-content-center' id='otn-bd-kt'>
+            <div className="input-group mb-2">
+              <span className="input-group-text" >Bắt đầu:</span>
               <input type="number" className="input-training" value={this.state.ip1} onChange={this.onChangeIp1.bind(this)} />
             </div>
 
-            <div className="input-group mb-3 input-form-training">
-              <div className="input-group-prepend">
-                <span className="input-group-text" >Kết Thúc:</span>
-              </div>
+            <div className="input-group mb-2">
+              <span className="input-group-text" >Kết Thúc:</span>
               <input type="number" className="input-training" value={this.state.ip2} onChange={this.onChangeIp2.bind(this)}
-
               />
             </div>
           </div>

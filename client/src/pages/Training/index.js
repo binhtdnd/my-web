@@ -70,6 +70,7 @@ class Training extends Component {
 
 
 
+
     axios.get(`/api/words`, {
       params: {
         courses: sString[4],
@@ -82,22 +83,30 @@ class Training extends Component {
 
       .then(res => {
 
+        const courses = sString[4]
+        const st = localStorage.getItem(`w-${courses}`)
+        const data = JSON.parse(st)
+
         let lKanji = []
         let lHiragana = []
         let lMean = []
         let lHv = []
         let lOnlyKanji = []
-        const data = res.data;
+        //const data = res.data;
         let lcount = 0;
-        data.data.forEach(element => {
+        let tempIp1 = this.state.ip1
+        let tempIp2 = this.state.ip2
+        data.forEach(element => {
 
+          if (element.stt >= tempIp1 && element.stt <= tempIp2) {
+            lKanji.push(element.kanji)
+            lHiragana.push(element.hiragana)
+            lMean.push(element.mean)
+            lHv.push(element.hv)
+            lOnlyKanji.push(element.onlykanji)
+            lcount++
+          }
 
-          lKanji.push(element.kanji)
-          lHiragana.push(element.hiragana)
-          lMean.push(element.mean)
-          lHv.push(element.hv)
-          lOnlyKanji.push(element.onlykanji)
-          lcount++
         });
         if (this.state.sp1 === '1') {
           lKanji.push("Hết rồi, F5 đi, bấm gì nữa")
@@ -409,6 +418,9 @@ class Training extends Component {
             {'\u00A0'}
 
             Ghi chú</button>
+          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#guideModal">
+            Hướng dẫn
+          </button>
         </div>
         <span id='label-note' className={`badge badge-pill badge-dark mt-3 ${this.state.showNote ? "" : 'bHidden'}`}>
           {localStorage.getItem(`${this.state.courses}${this.state.ip1 + this.state.step}`)}
@@ -450,7 +462,45 @@ class Training extends Component {
             </div>
           </div>
         </div >
+        {/* modal guide */}
 
+
+
+
+        <div class="modal fade" id="guideModal" tabindex="-1" role="dialog" aria-labelledby="guideModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="guideModalLabel">Cách sử dụng: </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body d-flex flex-column">
+                <div>
+                  <span class="badge badge-warning">Lưu:</span>
+                  <label>{'\u00A0'}Lưu những từ khó chưa thuộc</label>
+                </div>
+                <div>
+                  <span class="badge badge-primary">食べる</span>
+                  <label>{'\u00A0'}Ẩn đuôi [る] của động từ, [い] tính từ</label>
+                </div>
+                <div>
+                  <span class="badge badge-success"><i className='fa fa-square-o'></i>G̶̶h̶̶i̶ ̶c̶̶h̶̶ú̶</span>
+                  <label>{'\u00A0'}Ẩn hiện ghi chú của mỗi từ</label>
+                </div>
+                <div>
+                  <span class="badge badge-info"><i className="fa fa-pencil"></i>Ghi chú</span>
+                  <label>{'\u00A0'}Ghi chú cho mỗi từ theo sở thích của bạn</label>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
       </div >
     )
   }

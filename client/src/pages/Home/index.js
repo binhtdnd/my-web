@@ -9,62 +9,102 @@ class Home extends Component {
         this.state = {
             courses: [],
             word: [],
-            n5isDownload: window.localStorage.getItem('n5isDownload') === 'true' ? 'true' : 'false',
-            n4isDownload: window.localStorage.getItem('n4isDownload') === 'true' ? 'true' : 'false',
-            n3isDownload: window.localStorage.getItem('n3isDownload') === 'true' ? 'true' : 'false',
+            downloading: true,
         }
 
     };
 
     componentDidMount() {
-        axios.get('/api/courses')
-            .then(res => {
-                const data = res.data;
-                this.setState({
-                    courses: data.data
-                });
-            })
-            .catch(error => console.log(error));
+        if (!localStorage.hasOwnProperty('w-n5') ||
+            !localStorage.hasOwnProperty('w-n4') ||
+            !localStorage.hasOwnProperty('w-n3') ||
+            !localStorage.hasOwnProperty('w-vn5') ||
+            !localStorage.hasOwnProperty('w-vn4')
+        ) {
+            document.querySelector('[data-target="#exampleModal"]').click();
+        }
 
+        this.getWords('n5')
+        this.getWords('n4')
+        this.getWords('n3')
+        this.getWords('vn5')
+        this.getWords('vn4')
     };
+    closeModel(e) {
+        if (localStorage.hasOwnProperty('w-n5') &&
+            localStorage.hasOwnProperty('w-n4') &&
+            localStorage.hasOwnProperty('w-n3') &&
+            localStorage.hasOwnProperty('w-vn5') &&
+            localStorage.hasOwnProperty('w-vn4')
+        ) {
+            document.querySelector('#dismissModal').click()
+        }
+        document.querySelector('#dismissLoading').className = 'badge badge-warning'
+        setTimeout(function () {
+            document.querySelector('#dismissLoading').className = 'badge badge-warning bHidden'
+        }.bind(this), 1000);
+    }
 
-
+    getWords(courses) {
+        if (!localStorage.hasOwnProperty(`w-${courses}`)) {
+            axios.get(`/api/words`, {
+                params: {
+                    courses: courses,
+                }
+            })
+                .then(res => {
+                    const data = res.data.data;
+                    localStorage.setItem(`w-${courses}`, JSON.stringify(data))
+                })
+                .catch(error => console.log(error));
+        }
+    }
 
     render() {
 
-
-
         return (
             <div className='container mt-4'>
-                {/* <div className="row courses-product">
 
-                    {this.state.courses.map(item => (
-
-                        <div className="col-sm-3 " name="col-sm" key={item.stt}>
-
-
-
-                            <Link to={`/courses/${item.name}`} >
-                                <div className="card home-card" >
-                                    <img className="card-img-top" src={item.img} alt="Card  cap" />
-                                    <div className="card-body">
-
-                                    </div>
-                                    <label className='label label-success'>
-                                        <h5>    {item.price === 0 ? 'Free' : item.price + '$'}</h5>
-                                    </label>
-                                </div>
-                            </Link>
-                        </div>
-                    ))}
-                </div> */}
                 <div className='d-flex flex-column' id='app-container'>
                     <Link to='/courses/n5' ><button className='btn btn-success btn-courses'>N5</button></Link>
                     <Link to='/courses/n4' ><button className='btn btn-primary btn-courses'>N4</button></Link>
                     <Link to='/courses/n3' ><button className='btn btn-warning btn-courses'>N3</button></Link>
                 </div>
 
+
+
+                <button type="button" className="bHidden btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Launch demo modal
+                </button>
+
+
+                <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+
+                            </div>
+                            <div className="modal-body">
+                                <i className='	fa fa-coffee'></i>
+                                <p>
+                                    Lần truy cập đầu tiên Web cần tải dữ liệu<br></br>
+                                    Vui lòng chờ trong giây lát...
+                                </p>
+                            </div>
+                            <div className="modal-footer">
+                                <button id='dismissModal' type="button" className="bHidden btn btn-secondary" data-dismiss="modal">Close</button>
+                                <span id='dismissLoading' className='badge badge-warning bHidden'>Downloading...</span>
+                                <button type="button" className="btn btn-primary"
+                                    onClick={(event) => this.closeModel(event)}
+                                >Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div >
+
         )
     }
 };

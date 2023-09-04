@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+
 
 class NoRemember extends Component {
   constructor(props) {
@@ -12,26 +12,29 @@ class NoRemember extends Component {
 
   componentDidMount() {
 
-    axios.get(`/api/noremember`, {
-      params: {
-        courses: window.location.pathname.slice(-2),
-        listNoRemember: localStorage.getItem(window.location.pathname.slice(-2))
+    const courses = window.location.pathname.slice(-2)
+    if (localStorage.hasOwnProperty(window.location.pathname.slice(-2))) {
+      const listNoRemember = localStorage.getItem(window.location.pathname.slice(-2))
+      const st1 = localStorage.getItem(`w-${courses}`)
+      const data = JSON.parse(st1)
+      let temp = []
+      data.forEach(element => {
+        if (listNoRemember.indexOf(element.stt) > -1) {
+          temp.push(element)
+        }
+      });
+      this.setState({ word: temp });
+
+      let st = localStorage.getItem(window.location.pathname.slice(-2))
+
+      // xoa trung lap trong array
+      if (st) {
+        let temp = st.split(',')
+        temp = temp.filter((value, index, array) =>
+          array.indexOf(value) === index
+        )
+        localStorage.setItem(window.location.pathname.slice(-2), temp)
       }
-    })
-      .then(res => {
-        const data = res.data;
-        this.setState({ word: data.data });
-      })
-      .catch(error => console.log(error));
-
-    let st = localStorage.getItem(window.location.pathname.slice(-2))
-
-    if (st) {
-      let temp = st.split(',')
-      temp = temp.filter((value, index, array) =>
-        array.indexOf(value) === index
-      )
-      localStorage.setItem(window.location.pathname.slice(-2), temp)
     }
 
   };

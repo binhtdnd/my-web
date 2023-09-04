@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+
 
 
 class ChiaDongTu extends Component {
@@ -30,23 +30,15 @@ class ChiaDongTu extends Component {
 
 
     componentDidMount() {
+        const courses = window.location.pathname.slice(-3)
+        let listWord = []
+        const st = localStorage.getItem(`w-${courses}`)
+        const data = JSON.parse(st)
 
-        axios.get(`/api/v`, {
-            params: {
-                courses: window.location.pathname.slice(-3),
-            }
-        })
-            .then(res => {
-                const data = res.data;
-                var listWord = []
-                data.data.map(item => (
-                    listWord.push(item)
-                ))
-                this.setState({ word: listWord });
-
-            })
-            .catch(error => console.log(error));
-
+        data.map(item => (
+            listWord.push(item)
+        ))
+        this.setState({ word: listWord });
     };
 
     questionShow() {
@@ -475,10 +467,13 @@ class ChiaDongTu extends Component {
 
                 <h3 className='d-inline'> <span className="badge badge-dark ml-3">{this.state.step}</span></h3>
 
-                <form className="form-inline my-2 my-lg-0 d-inline input-search-verb ml-3">
-                    <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={this.inputGotoChange.bind(this)} />
-                    <button className="btn btn-outline-warning my-2 my-sm-0" type="submit" onClick={(event) => this.goto(event)}>Go to</button>
-                </form>
+                <div className="my-2 ml-3 d-flex justify-content-center">
+                    <input id='cdn-input-goto' className="form-control" type="number"
+                        min="0" max={this.state.word.length - 1}
+                        placeholder="Sô thứ tự" aria-label="Search" onChange={this.inputGotoChange.bind(this)} />
+                    <button className="btn btn-outline-warning" onClick={(event) => this.goto(event)}>Go to</button>
+
+                </div>
 
 
                 <div>
@@ -535,10 +530,10 @@ class ChiaDongTu extends Component {
                     <br />
                     <div className='d-inline' id='divBtnNav'>
                         <button className='btn btn-primary ml-0 flex btnNav' onClick={() => this.onBtnNavClick(-1)}>
-                            <i className="fas fa-chevron-left"></i>    Previous
+                            Previous
                         </button>
                         <button className='btn btn-success ml-5 btnNav' onClick={() => this.onBtnNavClick(1)}>
-                            Next<i className="fas fa-chevron-right"></i>
+                            Next
                         </button>
                     </div>
 

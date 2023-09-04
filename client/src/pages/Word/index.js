@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 class Word extends Component {
   constructor(props) {
@@ -12,17 +11,10 @@ class Word extends Component {
 
   componentDidMount() {
 
-
-    axios.get(`/api/words`, {
-      params: {
-        courses: window.location.pathname.slice(-2),
-      }
-    })
-      .then(res => {
-        const data = res.data;
-        this.setState({ word: data.data });
-      })
-      .catch(error => console.log(error));
+    const courses = window.location.pathname.slice(-2)
+    const st = localStorage.getItem(`w-${courses}`)
+    const data = JSON.parse(st)
+    this.setState({ word: data });
 
 
   };
