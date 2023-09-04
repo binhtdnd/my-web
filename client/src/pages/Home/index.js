@@ -39,10 +39,7 @@ class Home extends Component {
         ) {
             document.querySelector('#dismissModal').click()
         }
-        document.querySelector('#dismissLoading').className = 'badge badge-warning'
-        setTimeout(function () {
-            document.querySelector('#dismissLoading').className = 'badge badge-warning bHidden'
-        }.bind(this), 1000);
+        window.location.reload();
     }
 
     getWords(courses) {
@@ -94,7 +91,7 @@ class Home extends Component {
                             </div>
                             <div className="modal-footer">
                                 <button id='dismissModal' type="button" className="bHidden btn btn-secondary" data-dismiss="modal">Close</button>
-                                <span id='dismissLoading' className='badge badge-warning bHidden'>Downloading...</span>
+
                                 <button type="button" className="btn btn-primary"
                                     onClick={(event) => this.closeModel(event)}
                                 >Close</button>
