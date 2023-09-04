@@ -230,7 +230,7 @@ class Training extends Component {
     }
     this.setState({
       step: this.state.step - 1,
-      sNote: ''
+
     }, () => {
       this.afterSetStateFinished();
     })
@@ -242,7 +242,7 @@ class Training extends Component {
 
     this.setState({
       step: this.state.step + 1,
-      sNote: ''
+
     }, () => {
       this.afterSetStateFinished();
     })
@@ -429,7 +429,7 @@ class Training extends Component {
                   <div className="form-group">
                     <label htmlFor="message-text" className="col-form-label">Nội dung:</label>
                     <textarea className="form-control areaNote" id="areaNote"
-                      value={this.state.sNote}
+                      value={this.state.sNote || ""}
 
                       onChange={(event) => this.handleNoteChange(event)}>
 

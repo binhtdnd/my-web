@@ -4,7 +4,6 @@ import Word from '../pages/Word'
 import NoRemember from '../pages/NoRemember'
 import OptionTraining from '../pages/OptionTraining'
 import Training from '../pages/Training'
-import { HeaderOnly } from '../component/Layout'
 import ChiaDongTu from '../pages/ChiaDongTu'
 
 
@@ -13,12 +12,12 @@ import ChiaDongTu from '../pages/ChiaDongTu'
 const publicRoutes = [
     { path: '/', component: Home },
     { path: '/courses/:slug', component: Courses },
-    { path: '/words/:slug', component: Word, layout: HeaderOnly },
-    { path: '/noremember/:slug', component: NoRemember, layout: HeaderOnly },
+    { path: '/words/:slug', component: Word },
+    { path: '/noremember/:slug', component: NoRemember },
     { path: '/option-training/:slug', component: OptionTraining },
-    { path: '/training/:slug', component: Training, layout: HeaderOnly },
+    { path: '/training/:slug', component: Training },
     { path: '/chiadongtu/:slug', component: ChiaDongTu },
-
+    { path: '/*', component: Home },
 ]
 
 const privateRoutes = [

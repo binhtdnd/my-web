@@ -191,6 +191,15 @@ input:invalid {
   margin-right: 20px;
 }
 
+#app-container .btn-courses {
+  min-width: 100px;
+  min-height: 50px;
+  margin-top: 30px;
+  font-size: 2rem;
+
+}
+
+
 /* Mobile: with  <740px*/
 @media only screen and (max-width:46.1875em) {
   .courses-product {
