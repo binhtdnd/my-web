@@ -36,6 +36,7 @@ class Training extends Component {
       isOnlyKanji: false,
       sNote: '',
       showNote: false,
+      lastStep: 0,
     }
 
   };
@@ -124,12 +125,15 @@ class Training extends Component {
     );
 
 
-
+    localStorage.setItem(`lastStep${courses}`, Number.parseInt(sString[2]))
 
   };
 
-  subtract(a, b) {
-    return (a - b);
+  saveLastStep() {
+    this.setState({
+      lastStep: this.state.step + this.state.ip1 + 1
+    })
+    localStorage.setItem(`lastStep${this.state.courses}`, this.state.step + this.state.ip1 + 1)
   }
   checkShowNote(e) {
     this.setState({
@@ -227,6 +231,7 @@ class Training extends Component {
     if (this.state.step <= 0) {
       return
     }
+    this.saveLastStep()
     this.setState({
       step: this.state.step - 1,
 
@@ -237,7 +242,7 @@ class Training extends Component {
     e.preventDefault();
   }
   onClickNext(e) {
-
+    this.saveLastStep()
 
     this.setState({
       step: this.state.step + 1,
@@ -250,7 +255,7 @@ class Training extends Component {
   }
 
   onClickBtn1(event, param) {
-
+    this.saveLastStep()
     if (this.checkAnswer(this.state.check, param)) {
 
       this.setState({
@@ -362,7 +367,7 @@ class Training extends Component {
           <span className="badge badge-warning radio-left">{this.state.pass === true ? "" : 'Sai !!!'}</span>
           <span className="badge badge-danger radio-left">{this.state.step - (this.state.ip2 - this.state.ip1) > 1 ? 'Đã bảo hết rồi (◣_◢)' : ''}</span>
         </div>
-
+        <h4><span className="badge badge-dark">{this.state.ip1 + this.state.step + 1}</span></h4>
         <div id='training-btn'>
 
           {/* quay lai */}

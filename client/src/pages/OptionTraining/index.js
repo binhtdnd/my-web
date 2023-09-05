@@ -149,8 +149,15 @@ class Training extends Component {
 
           </div>
         </form >
+        <h5>
+          <span className="span badge-info mb-2" >
+            {`\u00A0 Đang dừng lại ở: ${Number.parseInt(localStorage.getItem(`lastStep${this.state.courses}`) || 0) + 1} \u00A0`}
+          </span>
+        </h5>
         <form onSubmit={this.submitHandle}>
           <div className='input-form-training d-flex flex-column justify-content-center' id='otn-bd-kt'>
+
+
             <div className="input-group mb-2">
               <span className="input-group-text badge-primary" >Bắt đầu:</span>
               <input type="number" className="input-training" value={this.state.ip1} onChange={this.onChangeIp1.bind(this)} />
