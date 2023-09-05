@@ -407,7 +407,7 @@ class Training extends Component {
 
               <label id='lb-note' htmlFor='exampleCheck1'
                 className={`align-middle align-item-center badge ${this.state.showNote ? "badge-success" : "badge-dark"}`}>
-                <h5>{this.state.showNote ? 'Ghi chú' : '̶G̶̶h̶̶i̶ ̶c̶̶h̶̶ú̶'}</h5>
+                <h4>{this.state.showNote ? 'Ghi chú' : '̶G̶̶h̶̶i̶ ̶c̶̶h̶̶ú̶'}</h4>
               </label>
 
             </div>
@@ -492,6 +492,10 @@ class Training extends Component {
                 <div>
                   <span className="badge badge-info"><i className="fa fa-pencil"></i>Ghi chú</span>
                   <label>{'\u00A0'}Ghi chú cho mỗi từ theo sở thích của bạn</label>
+                </div>
+                <div>
+                  <span className="badge badge-warning">Copy</span>
+                  <label>{'\u00A0'}Bấm vào dòng câu hỏi trên cùng để copy câu hỏi</label>
                 </div>
               </div>
               <div className="modal-footer">
