@@ -152,12 +152,12 @@ class Training extends Component {
         <form onSubmit={this.submitHandle}>
           <div className='input-form-training d-flex flex-column justify-content-center' id='otn-bd-kt'>
             <div className="input-group mb-2">
-              <span className="input-group-text" >Bắt đầu:</span>
+              <span className="input-group-text badge-primary" >Bắt đầu:</span>
               <input type="number" className="input-training" value={this.state.ip1} onChange={this.onChangeIp1.bind(this)} />
             </div>
 
             <div className="input-group mb-2">
-              <span className="input-group-text" >Kết Thúc:</span>
+              <span className="input-group-text badge-success" >Kết Thúc:</span>
               <input type="number" className="input-training" value={this.state.ip2} onChange={this.onChangeIp2.bind(this)}
               />
             </div>

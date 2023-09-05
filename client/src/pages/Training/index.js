@@ -70,10 +70,6 @@ class Training extends Component {
       this.afterSetStateFinished();
     })
 
-
-
-
-
     const courses = sString[4]
     const st = localStorage.getItem(`w-${courses}`)
     const data = JSON.parse(st)
@@ -87,6 +83,7 @@ class Training extends Component {
     let lcount = 0;
     let tempIp1 = Number.parseInt(sString[2]);
     let tempIp2 = Number.parseInt(sString[3]);
+
     data.forEach(element => {
       const nm = Number.parseInt(element.stt)
       if (nm >= tempIp1 && nm <= tempIp2) {
@@ -96,18 +93,19 @@ class Training extends Component {
         lHv.push(element.hv)
         lOnlyKanji.push(element.onlykanji)
         lcount++
+      } else if (nm === tempIp2 + 1) {
+        const addPosition = sString[0]
 
+        if (addPosition === '1') {
+          lKanji.push("Hết rồi, F5 đi, bấm gì nữa")
+        } else if (addPosition === '2') {
+          lHiragana.push("Hết rồi, F5 đi, bấm gì nữa")
+        } if (addPosition === '3') {
+          lMean.push("Hết rồi, F5 đi, bấm gì nữa")
+        }
       }
-
     });
 
-    if (this.state.sp1 === '1') {
-      lKanji.push("Hết rồi, F5 đi, bấm gì nữa")
-    } else if (this.state.sp1 === '2') {
-      lHiragana.push("Hết rồi, F5 đi, bấm gì nữa")
-    } if (this.state.sp1 === '3') {
-      lMean.push("Hết rồi, F5 đi, bấm gì nữa")
-    }
 
 
 
@@ -323,13 +321,13 @@ class Training extends Component {
 
 
     return (
-      <div className='container ' id='training-content'>
+      <div id='training-content' className='container'>
 
 
         <div className='radio-container' >
 
           <div className='hv'>
-            <span className="radio-left" id='span-question' >
+            <span className="radio-left" id='span-question' onClick={(event) => { navigator.clipboard.writeText(event.target.innerHTML) }}>
               {this.state.isOnlyKanji ? this.state.stateOnlyKanji[this.state.step] : this.state.question}
             </span>
           </div>
@@ -365,58 +363,63 @@ class Training extends Component {
           <span className="badge badge-danger radio-left">{this.state.step - (this.state.ip2 - this.state.ip1) > 1 ? 'Đã bảo hết rồi (◣_◢)' : ''}</span>
         </div>
 
+        <div id='training-btn'>
 
-
-        <div className='footer-btn d-flex justify-content-start mt-5'>
-          <button className='btn btn-primary' onClick={(event) => this.onClickBack(event)}>
-            <i className="fa fa-chevron-left"></i>
-            {'\u00A0'}
-            Quay Lại
-          </button>
-          <button className='btn btn-success ml-2' onClick={(event) => this.onClickNext(event)}>
-            Bỏ Qua
-            {'\u00A0'}
-            <i className="fa fa-chevron-right"></i>
-          </button>
-          <button className='btn btn-warning ml-2' onClick={(event) => this.onClickSave(event)}>
-            <i className="fa fa-book"></i>{'\u00A0'}Lưu</button>
-        </div>
-        {/* Han Viet */}
-        <div className='footer-btn d-flex justify-content-center mt-3 align-items-center '>
-          <button className='btn btn-dark ml-2' onClick={(event) => this.onClickHV(event)}>Hán Việt{'\u00A0'}</button>
-          <button className='btn btn-light ml-2' onClick={(event) => this.onClickMean(event)}>Nghĩa{'\u00A0'}</button>
-
-          <button className={`btn ml-2 ${this.state.isOnlyKanji ? 'btn-dark' : 'btn-primary'}`} onClick={(event) => this.onClickOnlyKanji(event)}>
-            {this.state.isOnlyKanji ? '食' : '食べる'}
-          </button>
-        </div>
-        {/* NOTE */}
-        <div className='d-flex justify-content-end align-items-center mt-3 '>
-          <div className="form-check d-flex text-center ml-2">
-            <input type="checkbox" className="form-check-input" id="exampleCheck1"
-              onChange={(event) => this.checkShowNote(event)}
-            />
-
-
-            <label htmlFor='exampleCheck1'
-              className={`align-middle ml-1 align-item-center badge ${this.state.showNote ? "badge-success" : "badge-dark"}`}>
-              <h5>{this.state.showNote ? 'Ghi chú' : '̶G̶̶h̶̶i̶ ̶c̶̶h̶̶ú̶'}</h5>
-            </label>
-
+          {/* quay lai */}
+          <div className=' d-flex justify-content-start mt-5'>
+            <button className='btn btn-primary' onClick={(event) => this.onClickBack(event)}>
+              <i className="fa fa-chevron-left"></i>
+              {'\u00A0'}
+              Quay Lại
+            </button>
+            <button className='btn btn-success' onClick={(event) => this.onClickNext(event)}>
+              Bỏ Qua
+              {'\u00A0'}
+              <i className="fa fa-chevron-right"></i>
+            </button>
+            <button className='btn btn-warning' onClick={(event) => this.onClickSave(event)}>
+              <i className="fa fa-book"></i>
+              {'\u00A0'}
+              Lưu
+            </button>
           </div>
-          <button type="button" className='btn btn-info ml-2 mr-2' data-toggle="modal"
-            data-target="#exampleModal" data-whatever="@mdo"
-            onClick={(event) => this.onClickNote(event)}><i className="fa fa-pencil"></i>
-            {'\u00A0'}
+          {/* Han Viet */}
+          <div className=' d-flex justify-content-start mt-3'>
+            <button className='btn btn-dark' onClick={(event) => this.onClickHV(event)}>Hán Việt{'\u00A0'}</button>
+            <button className='btn btn-secondary' onClick={(event) => this.onClickMean(event)}>Nghĩa{'\u00A0'}</button>
 
-            Ghi chú</button>
-          <button type="button" className="btn btn-warning" data-toggle="modal" data-target="#guideModal">
-            Hướng dẫn
-          </button>
+            <button className={`btn ${this.state.isOnlyKanji ? 'btn-dark' : 'btn-primary'}`} onClick={(event) => this.onClickOnlyKanji(event)}>
+              {this.state.isOnlyKanji ? '食' : '食べる'}
+            </button>
+          </div>
+          {/* NOTE */}
+          <div className='d-flex justify-content-start mt-3' id='div-note'>
+            <div className="form-check d-flex text-center">
+              <input id="exampleCheck1" type="checkbox" className="form-check-input"
+                onChange={(event) => this.checkShowNote(event)}
+              />
+
+
+              <label id='lb-note' htmlFor='exampleCheck1'
+                className={`align-middle align-item-center badge ${this.state.showNote ? "badge-success" : "badge-dark"}`}>
+                <h5>{this.state.showNote ? 'Ghi chú' : '̶G̶̶h̶̶i̶ ̶c̶̶h̶̶ú̶'}</h5>
+              </label>
+
+            </div>
+            <button type="button" className='btn btn-info mr-3.5' data-toggle="modal"
+              data-target="#exampleModal" data-whatever="@mdo"
+              onClick={(event) => this.onClickNote(event)}><i className="fa fa-pencil"></i>
+              {'\u00A0'}
+
+              Ghi chú</button>
+            <button type="button" className="btn btn-warning" data-toggle="modal" data-target="#guideModal">
+              Hướng dẫn
+            </button>
+          </div>
+          <span id='label-note' className={`badge badge-pill badge-dark mt-3 ${this.state.showNote ? "" : 'bHidden'}`}>
+            {localStorage.getItem(`${this.state.courses}${this.state.ip1 + this.state.step}`)}
+          </span>
         </div>
-        <span id='label-note' className={`badge badge-pill badge-dark mt-3 ${this.state.showNote ? "" : 'bHidden'}`}>
-          {localStorage.getItem(`${this.state.courses}${this.state.ip1 + this.state.step}`)}
-        </span>
         {/* modal */}
         <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div className="modal-dialog" role="document">

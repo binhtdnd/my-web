@@ -23,15 +23,15 @@ class Word extends Component {
   render() {
 
     return (
-      <>
+      <div id='word-background'>
 
-        <table className='table root' >
+        <table className='table' id='word-container' >
           <thead>
             <tr>
-              <th scope='col'>#</th>
-              <th scope='col'>Nghĩa</th>
-              <th scope='col'>Hiragana</th>
-              <th scope='col'>Kanji</th>
+              <td >#</td>
+              <td >Nghĩa</td>
+              <td >Hiragana</td>
+              <td >Kanji</td>
 
             </tr>
           </thead>
@@ -40,7 +40,7 @@ class Word extends Component {
             {this.state.word.map(item => (
 
               <tr className='tr-list-word' key={item.stt}>
-                <th scope='row'>{item.stt}</th>
+                <td >{item.stt}</td>
                 <td>{item.kanji}</td>
                 <td>{item.hiragana}</td>
                 <td>{item.mean}</td>
@@ -52,7 +52,7 @@ class Word extends Component {
 
           </tbody>
         </table>
-      </>
+      </div>
     )
   }
 };

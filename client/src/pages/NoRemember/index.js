@@ -68,13 +68,13 @@ class NoRemember extends Component {
     return (
       <>
 
-        <table className='table root' >
+        <table className='table root' id='NoRemember-Container'  >
           <thead>
             <tr>
-              <th scope='col'>#</th>
-              <th scope='col'>Nghĩa</th>
-              <th scope='col'>Hiragana</th>
-              <th scope='col'>Kanji</th>
+              <td >#</td>
+              <td >Nghĩa</td>
+              <td >Hiragana</td>
+              <td >Kanji</td>
               <td>
 
                 <button className='btn btn-warning'
@@ -91,7 +91,7 @@ class NoRemember extends Component {
             {this.state.word.map(item => (
 
               <tr className='tr-list-word ' key={item.stt}>
-                <th scope='row'>{item.stt}</th>
+                <td >{item.stt}</td>
                 <td>{item.kanji}</td>
                 <td>{item.hiragana}</td>
                 <td>{item.mean}</td>
