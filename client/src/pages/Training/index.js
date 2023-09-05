@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import axios from 'axios';
+
 import { toast } from 'react-toastify';
 
 class Training extends Component {
@@ -14,7 +14,7 @@ class Training extends Component {
       ipStart: '',
       ipEnd: '',
       ip1: 0,
-      ip2: '',
+      ip2: 0,
       courses: window.location.pathname.slice(-2),
       tempWord: ['', '暗証番号', 'あんしょうばんごう', 'Mã số định danh cá nhân'],
 
@@ -63,78 +63,70 @@ class Training extends Component {
       sp1: sString[0],
       sp2: sString[1],
       ip1: Number.parseInt(sString[2]),
-      ip2: sString[3],
+      ip2: Number.parseInt(sString[3]),
       courses: sString[4],
       noRemember: localStorage.getItem(sString[4]),
+    }, () => {
+      this.afterSetStateFinished();
     })
 
 
 
 
-    axios.get(`/api/words`, {
-      params: {
-        courses: sString[4],
-        sp1: sString[0],
-        sp2: sString[1],
-        ip1: sString[2],
-        ip2: sString[3],
+
+    const courses = sString[4]
+    const st = localStorage.getItem(`w-${courses}`)
+    const data = JSON.parse(st)
+
+    let lKanji = []
+    let lHiragana = []
+    let lMean = []
+    let lHv = []
+    let lOnlyKanji = []
+    //const data = res.data;
+    let lcount = 0;
+    let tempIp1 = Number.parseInt(sString[2]);
+    let tempIp2 = Number.parseInt(sString[3]);
+    data.forEach(element => {
+      const nm = Number.parseInt(element.stt)
+      if (nm >= tempIp1 && nm <= tempIp2) {
+        lKanji.push(element.kanji)
+        lHiragana.push(element.hiragana)
+        lMean.push(element.mean)
+        lHv.push(element.hv)
+        lOnlyKanji.push(element.onlykanji)
+        lcount++
+
       }
-    })
 
-      .then(res => {
+    });
 
-        const courses = sString[4]
-        const st = localStorage.getItem(`w-${courses}`)
-        const data = JSON.parse(st)
-
-        let lKanji = []
-        let lHiragana = []
-        let lMean = []
-        let lHv = []
-        let lOnlyKanji = []
-        //const data = res.data;
-        let lcount = 0;
-        let tempIp1 = this.state.ip1
-        let tempIp2 = this.state.ip2
-        data.forEach(element => {
-
-          if (element.stt >= tempIp1 && element.stt <= tempIp2) {
-            lKanji.push(element.kanji)
-            lHiragana.push(element.hiragana)
-            lMean.push(element.mean)
-            lHv.push(element.hv)
-            lOnlyKanji.push(element.onlykanji)
-            lcount++
-          }
-
-        });
-        if (this.state.sp1 === '1') {
-          lKanji.push("Hết rồi, F5 đi, bấm gì nữa")
-        } else if (this.state.sp1 === '2') {
-          lHiragana.push("Hết rồi, F5 đi, bấm gì nữa")
-        } if (this.state.sp1 === '3') {
-          lMean.push("Hết rồi, F5 đi, bấm gì nữa")
-        }
+    if (this.state.sp1 === '1') {
+      lKanji.push("Hết rồi, F5 đi, bấm gì nữa")
+    } else if (this.state.sp1 === '2') {
+      lHiragana.push("Hết rồi, F5 đi, bấm gì nữa")
+    } if (this.state.sp1 === '3') {
+      lMean.push("Hết rồi, F5 đi, bấm gì nữa")
+    }
 
 
 
 
-        this.setState({
+    this.setState({
 
-          stateKanji: lKanji,
-          stateHiragana: lHiragana,
-          stateMean: lMean,
-          stateHV: lHv,
-          stateOnlyKanji: lOnlyKanji,
-          scount: lcount,
-        }, () => {
-          this.afterSetStateFinished();
-        }
-        );
+      stateKanji: lKanji,
+      stateHiragana: lHiragana,
+      stateMean: lMean,
+      stateHV: lHv,
+      stateOnlyKanji: lOnlyKanji,
+      scount: lcount,
+    }, () => {
+      this.afterSetStateFinished();
+    }
+    );
 
 
-      })
-      .catch(error => console.log(error));
+
 
   };
 
@@ -418,7 +410,7 @@ class Training extends Component {
             {'\u00A0'}
 
             Ghi chú</button>
-          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#guideModal">
+          <button type="button" className="btn btn-warning" data-toggle="modal" data-target="#guideModal">
             Hướng dẫn
           </button>
         </div>
@@ -467,35 +459,35 @@ class Training extends Component {
 
 
 
-        <div class="modal fade" id="guideModal" tabindex="-1" role="dialog" aria-labelledby="guideModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="guideModalLabel">Cách sử dụng: </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <div className="modal fade" id="guideModal" tabIndex="-1" role="dialog" aria-labelledby="guideModalLabel" aria-hidden="true">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="guideModalLabel">Cách sử dụng: </h5>
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body d-flex flex-column">
+              <div className="modal-body d-flex flex-column">
                 <div>
-                  <span class="badge badge-warning">Lưu:</span>
+                  <span className="badge badge-warning">Lưu:</span>
                   <label>{'\u00A0'}Lưu những từ khó chưa thuộc</label>
                 </div>
                 <div>
-                  <span class="badge badge-primary">食べる</span>
+                  <span className="badge badge-primary">食べる</span>
                   <label>{'\u00A0'}Ẩn đuôi [る] của động từ, [い] tính từ</label>
                 </div>
                 <div>
-                  <span class="badge badge-success"><i className='fa fa-square-o'></i>G̶̶h̶̶i̶ ̶c̶̶h̶̶ú̶</span>
+                  <span className="badge badge-success"><i className='fa fa-square-o'></i>G̶̶h̶̶i̶ ̶c̶̶h̶̶ú̶</span>
                   <label>{'\u00A0'}Ẩn hiện ghi chú của mỗi từ</label>
                 </div>
                 <div>
-                  <span class="badge badge-info"><i className="fa fa-pencil"></i>Ghi chú</span>
+                  <span className="badge badge-info"><i className="fa fa-pencil"></i>Ghi chú</span>
                   <label>{'\u00A0'}Ghi chú cho mỗi từ theo sở thích của bạn</label>
                 </div>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
 
               </div>
             </div>

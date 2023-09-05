@@ -7,7 +7,7 @@ class Header extends Component {
             <div>
 
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <Link className="navbar-brand" to="/">Alice lite</Link>
+                    <Link className="navbar-brand" to="/">Alice Lite</Link>
 
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
                         <span className="navbar-toggler-icon"></span>

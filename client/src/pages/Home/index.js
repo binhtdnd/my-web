@@ -40,6 +40,7 @@ class Home extends Component {
             document.querySelector('#dismissModal').click()
         }
         window.location.reload();
+
     }
 
     getWords(courses) {
