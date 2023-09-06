@@ -219,6 +219,12 @@ input:invalid {
   margin-right: 20px;
 }
 
+#label-note {
+
+
+  white-space: pre-wrap;
+  text-align: left;
+}
 
 
 /* Mobile: with  <740px*/

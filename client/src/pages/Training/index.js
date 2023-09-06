@@ -421,9 +421,9 @@ class Training extends Component {
               Hướng dẫn
             </button>
           </div>
-          <span id='label-note' className={`badge badge-pill badge-dark mt-3 ${this.state.showNote ? "" : 'bHidden'}`}>
+          <p id='label-note' className={`display-linebreak badge badge-dark mt-3 ${this.state.showNote ? "" : 'bHidden'}`}>
             {localStorage.getItem(`${this.state.courses}${this.state.ip1 + this.state.step}`)}
-          </span>
+          </p>
         </div>
         {/* modal */}
         <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
