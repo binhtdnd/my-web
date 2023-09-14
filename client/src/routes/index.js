@@ -17,8 +17,9 @@ const publicRoutes = [
     { path: '/option-training/:slug', component: OptionTraining },
     { path: '/training/:slug', component: Training },
     { path: '/chiadongtu/:slug', component: ChiaDongTu },
-    { path: '/*/:slug', component: Home },
-    { path: '/*/*', component: Home },
+    { path: '/*', component: Home },
+
+
 ]
 
 const privateRoutes = [

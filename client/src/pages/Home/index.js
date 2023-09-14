@@ -57,7 +57,13 @@ class Home extends Component {
                 .catch(error => console.log(error));
         }
     }
-
+    btnUpdate(e) {
+        e.preventDefault()
+        localStorage.removeItem('w-n5');
+        localStorage.removeItem('w-n4');
+        localStorage.removeItem('w-n3');
+        window.location.reload();
+    }
     render() {
 
         return (
@@ -67,6 +73,14 @@ class Home extends Component {
                     <Link to='/courses/n5' ><button className='btn btn-success btn-courses'>N5</button></Link>
                     <Link to='/courses/n4' ><button className='btn btn-primary btn-courses'>N4</button></Link>
                     <Link to='/courses/n3' ><button className='btn btn-warning btn-courses'>N3</button></Link>
+
+                    <div>
+                        <button className='btn btn-danger btn-courses'
+                            onClick={(e) => { this.btnUpdate(e) }}
+                        >
+                            Update
+                        </button>
+                    </div>
                 </div>
 
 

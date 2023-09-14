@@ -166,6 +166,7 @@ input:invalid {
 #app-container .btn-courses {
   min-width: 100px;
   min-height: 50px;
+  max-width: fit-content;
   margin-top: 30px;
   font-size: 2rem;
 

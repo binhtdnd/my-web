@@ -98,11 +98,11 @@ class Training extends Component {
         const addPosition = sString[0]
 
         if (addPosition === '1') {
-          lKanji.push("Hết rồi, F5 đi, bấm gì nữa")
+          lKanji.push("Hết rồi, Quay lại đi, bấm gì nữa")
         } else if (addPosition === '2') {
-          lHiragana.push("Hết rồi, F5 đi, bấm gì nữa")
+          lHiragana.push("Hết rồi, Quay lại đi, bấm gì nữa")
         } if (addPosition === '3') {
-          lMean.push("Hết rồi, F5 đi, bấm gì nữa")
+          lMean.push("Hết rồi, Quay lại đi, bấm gì nữa")
         }
       }
     });
