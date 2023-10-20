@@ -15,11 +15,13 @@ class NoRemember extends Component {
     const courses = window.location.pathname.slice(-2)
     if (localStorage.hasOwnProperty(window.location.pathname.slice(-2))) {
       const listNoRemember = localStorage.getItem(window.location.pathname.slice(-2))
+      const listArray = listNoRemember.split(",")
+
       const st1 = localStorage.getItem(`w-${courses}`)
       const data = JSON.parse(st1)
       let temp = []
       data.forEach(element => {
-        if (listNoRemember.indexOf(element.stt) > -1) {
+        if (listArray.indexOf(element.stt.toString()) > -1) {
           temp.push(element)
         }
       });
@@ -91,7 +93,7 @@ class NoRemember extends Component {
             {this.state.word.map(item => (
 
               <tr className='tr-list-word ' key={item.stt}>
-                <td >{item.stt}</td>
+                <td >{item.stt + 1}</td>
                 <td>{item.kanji}</td>
                 <td>{item.hiragana}</td>
                 <td>{item.mean}</td>
