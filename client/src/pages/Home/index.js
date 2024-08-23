@@ -62,6 +62,8 @@ class Home extends Component {
         localStorage.removeItem('w-n5');
         localStorage.removeItem('w-n4');
         localStorage.removeItem('w-n3');
+        localStorage.removeItem('w-vn5');
+        localStorage.removeItem('w-vn4');
         window.location.reload();
     }
     render() {

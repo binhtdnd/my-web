@@ -29,9 +29,10 @@ class Word extends Component {
           <thead>
             <tr>
               <td >#</td>
-              <td >Nghĩa</td>
-              <td >Hiragana</td>
               <td >Kanji</td>
+              <td >Hiragana</td>
+              <td >Nghĩa</td>
+              <td >English</td>
 
             </tr>
           </thead>
@@ -44,6 +45,7 @@ class Word extends Component {
                 <td>{item.kanji}</td>
                 <td>{item.hiragana}</td>
                 <td>{item.mean}</td>
+                <td>{item.end}</td>
 
               </tr>
             ))}

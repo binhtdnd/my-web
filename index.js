@@ -5,6 +5,8 @@ const path = require('path')
 const cors = require('cors')
 
 
+
+
 app.use(express.static(path.join(__dirname + "/public")))
 app.use(express.urlencoded({ extended: true }));
 
@@ -13,17 +15,17 @@ app.use(express.json());
 
 app.use(cors())
 
-const connection = mysql.createConnection({
-    host: '103.200.23.120',
-    user: 'aliceiov_binhtdnd',
-    password: 'mhbbnsbtcm1!qQbinh',
-    database: 'aliceiov_japan'
-});
 // const connection = mysql.createConnection({
-//     host: 'localhost',
-//     user: 'root',
-//     database: 'japan'
+//     host: '103.200.23.120',
+//     user: 'aliceiov_binhtdnd',
+//     password: 'mhbbnsbtcm1!qQbinh',
+//     database: 'aliceiov_japan'
 // });
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    database: 'japan'
+});
 
 
 // "proxy": "https://alice-21e1.onrender.com/"
@@ -36,8 +38,6 @@ function get(req, res, next) {
     let param = req.query.foo
     // ...
 }
-
-
 
 app.get('/api/words', (req, res) => {
 
@@ -92,4 +92,4 @@ app.get('/api/v', (req, res) => {
 
 
 
-app.listen(4000, () => console.log('App listening on port 4000 [Server]'));
+app.listen(5000, () => console.log('App listening on port 5000 [Server]'));
