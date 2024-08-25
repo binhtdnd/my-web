@@ -54,7 +54,7 @@ class Home extends Component {
 
     }
     downloadData(courses) {
-
+        console.log('call api kk')
         axios.get(`/api/downloadData`, {
 
         })

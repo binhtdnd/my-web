@@ -80,21 +80,8 @@ const getDB = async (course) => {
         // return JSON.stringify(result)
     } catch (erorr) { throw new Error(erorr) }
 }
-// app.get('/api/wordsMong', (req, res) => {
-//     console.log("n6 from api: ", n6)
-//     res.json({ data: n6 });
-// });
-app.get('/api/wordsMong', (req, res) => {
-    dataOfCourse = []
-    let course = req.query.courses
 
-    CONNECT_DB()
-        .then(() => console.log('connected'))
-        .then(() => getDB(course))
-        .then(() => res.json({ data: dataOfCourse }))
-        .catch()
 
-});
 app.get('/api/downloadData', (req, res) => {
     console.log('run api down')
 
@@ -105,6 +92,7 @@ app.get('/api/downloadData', (req, res) => {
     var vn4 = []
 
     CONNECT_DB()
+
         .then(() => console.log('connected'))
         .then(() => getDB('n5'))
         .then(() => n5 = dataOfCourse)
