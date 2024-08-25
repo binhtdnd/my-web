@@ -107,10 +107,7 @@ app.get('/api/downloadData', (req, res) => {
     CONNECT_DB()
         .then(() => console.log('connected'))
         .then(() => getDB('n5'))
-        .then(() => {
-            n5 = dataOfCourse
-
-        })
+        .then(() => n5 = dataOfCourse)
         .then(() => getDB('n4'))
         .then(() => n4 = dataOfCourse)
         .then(() => getDB('n3'))
@@ -119,8 +116,9 @@ app.get('/api/downloadData', (req, res) => {
         .then(() => vn5 = dataOfCourse)
         .then(() => getDB('vn4'))
         .then(() => vn4 = dataOfCourse)
+
         .then(() => res.json({ n5: n5, n4: n4, n3: n3, vn5: vn5, vn4: vn4 }))
-        .then(() => trelloDatabaseInstance.Close())
+
         .catch()
 
 });

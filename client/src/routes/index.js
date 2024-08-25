@@ -11,6 +11,7 @@ import ChiaDongTu from '../pages/ChiaDongTu'
 
 const publicRoutes = [
     { path: '/', component: Home },
+    { path: '/courses', component: Courses },
     { path: '/courses/:slug', component: Courses },
     { path: '/words/:slug', component: Word },
     { path: '/noremember/:slug', component: NoRemember },
