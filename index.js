@@ -25,10 +25,10 @@ const CONNECT_DB = async () => {
     trelloDatabaseInstance = mongoClientInstance.db(DATABASE_NAME)
 }
 
-var n6 = []
-var loadData = false;
-CONNECT_DB()
-    .then(() => console.log('connected'))
+var dataOfCourse = []
+// var loadData = false;
+// CONNECT_DB()
+//     .then(() => console.log('connected'))
 // .then(() => n6 = getDB())
 // .then(loadData = true)
 
@@ -49,15 +49,18 @@ app.use(bodyPaser.urlencoded({ extended: true, limit: '30mb' }))
 //     password: 'mhbbnsbtcm1!qQbinh',
 //     database: 'aliceiov_japan'
 // });
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    database: 'japan'
-});
+
+// AAA connect to xam
+// const connection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     database: 'japan'
+// });
 // "proxy": "https://alice-21e1.onrender.com/"
-connection.connect(function (err) {
-    (err) ? console.log(err) : console.log("You are connected the [server]!!!" + connection);
-});
+// connection.connect(function (err) {
+//     (err) ? console.log(err) : console.log("You are connected the [server]!!!" + connection);
+// });
+// BBBB end connect to xam
 
 function get(req, res, next) {
 
@@ -65,36 +68,62 @@ function get(req, res, next) {
     // ...
 }
 
-const START_SERVER = () => {
-    console.log('start server')
-    CONNECT_DB()
-        .then(() => console.log('connected'))
-        .then(() => getDB())
-        .catch()
-}
 
-START_SERVER()
-
-const getDB = async () => {
-    if (trelloDatabaseInstance) {
-        console.log('getdetail func')
-    }
-
+const getDB = async (course) => {
+    dataOfCourse = []
     try {
         // console.log('test: ', id)
         // const result = await trelloDatabaseInstance.collection(BOARD_COLLECTION_NAME).find()
-        const result = await trelloDatabaseInstance.collection('n6').find({
+        const result = await trelloDatabaseInstance.collection(course).find({
         }).toArray()
-        n6 = result
-
-        return JSON.stringify(result)
+        dataOfCourse = result
+        // return JSON.stringify(result)
     } catch (erorr) { throw new Error(erorr) }
 }
+// app.get('/api/wordsMong', (req, res) => {
+//     console.log("n6 from api: ", n6)
+//     res.json({ data: n6 });
+// });
 app.get('/api/wordsMong', (req, res) => {
-    console.log("n6 from api: ", n6)
-    res.json({ data: n6 });
-});
+    dataOfCourse = []
+    let course = req.query.courses
 
+    CONNECT_DB()
+        .then(() => console.log('connected'))
+        .then(() => getDB(course))
+        .then(() => res.json({ data: dataOfCourse }))
+        .catch()
+
+});
+app.get('/api/downloadData', (req, res) => {
+    console.log('run api down')
+
+    var n5 = []
+    var n4 = []
+    var n3 = []
+    var vn5 = []
+    var vn4 = []
+
+    CONNECT_DB()
+        .then(() => console.log('connected'))
+        .then(() => getDB('n5'))
+        .then(() => {
+            n5 = dataOfCourse
+
+        })
+        .then(() => getDB('n4'))
+        .then(() => n4 = dataOfCourse)
+        .then(() => getDB('n3'))
+        .then(() => n3 = dataOfCourse)
+        .then(() => getDB('vn5'))
+        .then(() => vn5 = dataOfCourse)
+        .then(() => getDB('vn4'))
+        .then(() => vn4 = dataOfCourse)
+        .then(() => res.json({ n5: n5, n4: n4, n3: n3, vn5: vn5, vn4: vn4 }))
+        .then(() => trelloDatabaseInstance.Close())
+        .catch()
+
+});
 app.get('/api/words', (req, res) => {
 
     let courses = req.query.courses

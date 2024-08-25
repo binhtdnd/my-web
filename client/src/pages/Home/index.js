@@ -17,20 +17,29 @@ class Home extends Component {
 
     componentDidMount() {
 
-        if (!localStorage.hasOwnProperty('w-n5') ||
+        if (
+            !localStorage.hasOwnProperty('w-n5') ||
             !localStorage.hasOwnProperty('w-n4') ||
             !localStorage.hasOwnProperty('w-n3') ||
             !localStorage.hasOwnProperty('w-vn5') ||
             !localStorage.hasOwnProperty('w-vn4')
         ) {
+
             document.querySelector('[data-target="#exampleModal"]').click();
         }
 
-        this.getWords('n5')
-        this.getWords('n4')
-        this.getWords('n3')
-        this.getWords('vn5')
-        this.getWords('vn4')
+        // this.getWords('n5')
+        // this.getWords('n4')
+        // this.getWords('n3')
+        // this.getWords('vn5')
+        // this.getWords('vn4')
+
+        this.downloadData()
+        // this.getWordsMong('n5')
+        // this.getWordsMong('n4')
+        // this.getWordsMong('n3')
+        // this.getWordsMong('vn5')
+        // this.getWordsMong('vn4')
     };
     closeModel(e) {
         if (localStorage.hasOwnProperty('w-n5') &&
@@ -44,9 +53,31 @@ class Home extends Component {
         window.location.reload();
 
     }
+    downloadData(courses) {
 
+        axios.get(`/api/downloadData`, {
+
+        })
+            .then(res => {
+                const n5 = res.data.n5;
+                const n4 = res.data.n4;
+                const n3 = res.data.n3;
+                const vn4 = res.data.vn4;
+                const vn5 = res.data.vn5;
+                // console.log('data from client: ', data)
+                // localStorage.setItem(`w-${courses}`, JSON.stringify(data))
+
+                localStorage.setItem('w-n5', JSON.stringify(n5))
+                localStorage.setItem('w-n4', JSON.stringify(n4))
+                localStorage.setItem('w-n3', JSON.stringify(n3))
+                localStorage.setItem('w-vn5', JSON.stringify(vn5))
+                localStorage.setItem('w-vn4', JSON.stringify(vn4))
+            })
+            .catch(error => console.log(error));
+
+    }
     getWordsMong(courses) {
-        const temp = 'n6'
+
         if (!localStorage.hasOwnProperty(`w-${courses}`) || true) {
             console.log('call api test')
             axios.get(`/api/wordsMong`, {
@@ -56,8 +87,8 @@ class Home extends Component {
             })
                 .then(res => {
                     const data = res.data.data;
-                    console.log(data)
-                    localStorage.setItem(`w-${temp}`, JSON.stringify(data))
+                    console.log('data from client: ', data)
+                    localStorage.setItem(`w-${courses}`, JSON.stringify(data))
                 })
                 .catch(error => console.log(error));
         }
