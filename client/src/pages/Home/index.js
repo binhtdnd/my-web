@@ -53,8 +53,7 @@ class Home extends Component {
         window.location.reload();
 
     }
-    downloadData(courses) {
-        console.log('call api kk')
+    downloadData() {
         axios.get(`/api/downloadData`, {
 
         })
@@ -79,7 +78,7 @@ class Home extends Component {
     getWordsMong(courses) {
 
         if (!localStorage.hasOwnProperty(`w-${courses}`) || true) {
-            console.log('call api test')
+
             axios.get(`/api/wordsMong`, {
                 params: {
                     courses: courses,
