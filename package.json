@@ -7,10 +7,10 @@
     "node": "18.x"
   },
   "scripts": {
-    "server": "node index.js",
+    "server": "nodemon index.js",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -25,7 +25,8 @@
     "mongodb": "^6.8.0",
     "mongoose": "^8.5.3",
     "mysql2": "^3.6.0",
-    "netlify-cli": "^16.1.0"
+    "netlify-cli": "^16.1.0",
+    "node-fetch": "^3.3.2"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

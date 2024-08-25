@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom'
 import '../.././App.css';
 
+
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -15,6 +16,7 @@ class Home extends Component {
     };
 
     componentDidMount() {
+
         if (!localStorage.hasOwnProperty('w-n5') ||
             !localStorage.hasOwnProperty('w-n4') ||
             !localStorage.hasOwnProperty('w-n3') ||
@@ -43,6 +45,24 @@ class Home extends Component {
 
     }
 
+    getWordsMong(courses) {
+        const temp = 'n6'
+        if (!localStorage.hasOwnProperty(`w-${courses}`) || true) {
+            console.log('call api test')
+            axios.get(`/api/wordsMong`, {
+                params: {
+                    courses: courses,
+                }
+            })
+                .then(res => {
+                    const data = res.data.data;
+                    console.log(data)
+                    localStorage.setItem(`w-${temp}`, JSON.stringify(data))
+                })
+                .catch(error => console.log(error));
+        }
+    }
+
     getWords(courses) {
         if (!localStorage.hasOwnProperty(`w-${courses}`)) {
             axios.get(`/api/words`, {
@@ -52,6 +72,7 @@ class Home extends Component {
             })
                 .then(res => {
                     const data = res.data.data;
+
                     localStorage.setItem(`w-${courses}`, JSON.stringify(data))
                 })
                 .catch(error => console.log(error));
@@ -65,6 +86,11 @@ class Home extends Component {
         localStorage.removeItem('w-vn5');
         localStorage.removeItem('w-vn4');
         window.location.reload();
+    }
+    btnTest(e) {
+        e.preventDefault()
+        this.getWordsMong('n5')
+        //window.location.reload();
     }
     render() {
 
@@ -81,6 +107,13 @@ class Home extends Component {
                             onClick={(e) => { this.btnUpdate(e) }}
                         >
                             Update
+                        </button>
+                    </div>
+                    <div>
+                        <button className='btn btn-danger btn-courses'
+                            onClick={(e) => { this.btnTest(e) }}
+                        >
+                            Test
                         </button>
                     </div>
                 </div>
