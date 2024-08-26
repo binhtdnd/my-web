@@ -38,7 +38,12 @@ app.use(express.urlencoded({ extended: true }));
 
 // parse application/json
 app.use(express.json());
-app.use(cors())
+
+app.use(cors({
+    origin: "https://slug-panel.onrender.com"
+}
+))
+app.options('*', cors())
 app.use(bodyPaser.json({ limit: '30mb' }))
 app.use(bodyPaser.urlencoded({ extended: true, limit: '30mb' }))
 
