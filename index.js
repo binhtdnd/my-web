@@ -56,7 +56,7 @@ app.use(bodyPaser.urlencoded({ extended: true, limit: '30mb' }))
 //     user: 'root',
 //     database: 'japan'
 // });
-// "proxy": "https://alice-21e1.onrender.com/"
+// https://jpn-eng.onrender.com
 // connection.connect(function (err) {
 //     (err) ? console.log(err) : console.log("You are connected the [server]!!!" + connection);
 // });
@@ -110,6 +110,14 @@ app.get('/api/downloadData', (req, res) => {
         .catch()
 
 });
+
+app.get('/api/wordsMong', (req, res) => {
+    console.log('test runningnnnn')
+    const result = 'mess send from server'
+    res.json({ data: result });
+});
+
+
 app.get('/api/words', (req, res) => {
 
     let courses = req.query.courses

@@ -35,6 +35,7 @@ class Home extends Component {
         // this.getWords('vn4')
 
         this.downloadData()
+
         // this.getWordsMong('n5')
         // this.getWordsMong('n4')
         // this.getWordsMong('n3')
@@ -75,22 +76,18 @@ class Home extends Component {
             .catch(error => console.log(error));
 
     }
-    getWordsMong(courses) {
+    getWordsMong() {
 
-        if (!localStorage.hasOwnProperty(`w-${courses}`) || true) {
 
-            axios.get(`/api/wordsMong`, {
-                params: {
-                    courses: courses,
-                }
+        console.log('call test')
+        axios.get(`/api/wordsMong`)
+            .then(res => {
+                const data = res.data.data;
+                console.log('data from client: ', data)
+                // localStorage.setItem(`w-${courses}`, JSON.stringify(data))
             })
-                .then(res => {
-                    const data = res.data.data;
-                    console.log('data from client: ', data)
-                    localStorage.setItem(`w-${courses}`, JSON.stringify(data))
-                })
-                .catch(error => console.log(error));
-        }
+            .catch(error => console.log(error));
+
     }
 
     getWords(courses) {
@@ -119,7 +116,7 @@ class Home extends Component {
     }
     btnTest(e) {
         e.preventDefault()
-        this.getWordsMong('n5')
+        this.getWordsMong()
         //window.location.reload();
     }
     render() {
