@@ -39,8 +39,7 @@ app.use(express.urlencoded({ extended: true }));
 // parse application/json
 app.use(express.json());
 
-app.use()
-app.options('*', cors())
+app.use(cors())
 app.use(bodyPaser.json({ limit: '30mb' }))
 app.use(bodyPaser.urlencoded({ extended: true, limit: '30mb' }))
 
